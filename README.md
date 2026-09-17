@@ -98,19 +98,40 @@ See the complete demonstrations for [ADC implementation](examples/adc-implementa
 
 ## Install
 
-Clone the repository into the skills directory supported by your agent environment:
+### Fastest option — ask your agent
 
-```bash
-git clone https://github.com/Skharbi/Clinical-workflow-analysis.git healthcare-clinical-workflow-analyst
+Paste this instruction into Codex or another agent that can install Agent Skills from GitHub:
+
+```text
+Install the healthcare-clinical-workflow-analyst skill from
+https://github.com/Skharbi/Clinical-workflow-analysis
 ```
 
-Invoke it explicitly as:
+Start a new turn or session after installation. The skill can then activate automatically for relevant healthcare workflow requests, or you can invoke it directly:
 
 ```text
 $healthcare-clinical-workflow-analyst
 ```
 
-It can also be selected automatically when the request clearly involves healthcare workflow analysis, requirements, safety, interoperability, downtime, or validation.
+### Terminal — one command
+
+For Codex on macOS or Linux:
+
+```bash
+git clone https://github.com/Skharbi/Clinical-workflow-analysis.git "${CODEX_HOME:-$HOME/.codex}/skills/healthcare-clinical-workflow-analyst"
+```
+
+For Codex on Windows PowerShell:
+
+```powershell
+git clone https://github.com/Skharbi/Clinical-workflow-analysis.git "$HOME\.codex\skills\healthcare-clinical-workflow-analyst"
+```
+
+### Any other Agent Skills client
+
+[Download the repository as a ZIP](https://github.com/Skharbi/Clinical-workflow-analysis/archive/refs/heads/main.zip), extract it, rename the folder `healthcare-clinical-workflow-analyst`, and place it in the skills directory documented by your client.
+
+There is no universal skills-directory path across every AI client. The skill files follow the Agent Skills folder pattern, but installation support and folder locations depend on the client being used.
 
 ## Repository guide
 

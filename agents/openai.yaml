@@ -1,0 +1,12 @@
+interface:
+  display_name: Healthcare Clinical Workflow Analyst
+  short_description: Analyze healthcare technology workflows safely
+  default_prompt: Use $healthcare-clinical-workflow-analyst to analyze this healthcare
+    technology workflow and produce a traceable, evidence-aware deliverable.
+policy:
+  allow_implicit_invocation: true
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas

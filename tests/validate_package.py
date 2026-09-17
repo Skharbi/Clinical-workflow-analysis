@@ -15,6 +15,7 @@ REQUIRED = {
     "README.md",
     "CONTRIBUTING.md",
     "LICENSE",
+    "assets/workflow-analyst-overview.svg",
     "agents/openai.yaml",
     "references/safety-and-human-factors.md",
     "references/evidence-and-uncertainty.md",

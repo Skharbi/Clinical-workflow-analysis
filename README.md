@@ -22,29 +22,75 @@ Those practices complement healthcare safety and informatics guidance; they do n
 
 It is not a clinical decision-support system and must not be used for patient-specific diagnosis, treatment selection, prescribing, or dosing.
 
-## Install in one command
+## Install — choose your AI
 
-For Codex, run:
+| Product | Fastest setup |
+| --- | --- |
+| OpenAI Codex or ChatGPT desktop | Run the OpenAI command below |
+| Claude Code | Run the Claude command below |
+| Claude.ai or Cowork | Use the no-terminal upload steps below |
+
+### OpenAI Codex and ChatGPT desktop
+
+Copy and run this command once:
 
 ```bash
 npx -y skills add Skharbi/Clinical-workflow-analysis --skill healthcare-clinical-workflow-analyst --global --agent codex --yes
 ```
 
-That is the complete installation. Restart Codex if it is already open, then use the skill normally or invoke it explicitly as `$healthcare-clinical-workflow-analyst`.
+Then restart Codex or ChatGPT desktop.
 
-The same installer supports other compatible agents. Omit `--agent codex` to select the target interactively:
+- In Codex, type `$healthcare-clinical-workflow-analyst` or open `/skills`.
+- In ChatGPT desktop, open **Skills** in the sidebar and type `@` in a chat to select the skill.
+
+### Claude Code
+
+Copy and run this command once:
+
+```bash
+npx -y skills add Skharbi/Clinical-workflow-analysis --skill healthcare-clinical-workflow-analyst --global --agent claude-code --yes
+```
+
+Then restart Claude Code. Type `/healthcare-clinical-workflow-analyst` to invoke it, or use `/skills` to confirm that it is installed.
+
+### No terminal: ChatGPT desktop, Claude.ai, or Cowork
+
+1. [Download the ZIP](https://github.com/Skharbi/Clinical-workflow-analysis/archive/refs/heads/main.zip).
+2. Extract it. The folder containing `SKILL.md` is the skill folder.
+3. Add it to your product:
+   - **ChatGPT desktop:** open **Skills** in the sidebar and add the extracted skill folder. Invoke it with `@healthcare-clinical-workflow-analyst`.
+   - **Claude.ai or Cowork:** open **Customize → Skills** (or the Skills settings on claude.ai), upload the ZIP, and enable it. Invoke it as `/healthcare-clinical-workflow-analyst` when available.
+
+Standalone OpenAI skills work in ChatGPT desktop, Codex CLI, and the Codex IDE extension. ChatGPT web and mobile require the skill to be distributed as an OpenAI plugin. A skill installed only in Claude Code's local folder is not automatically available in Claude.ai or Cowork; upload and enable it in Claude's Skills settings.
+
+### Manual folder locations
+
+If the installer is unavailable, put the extracted folder here:
+
+| Product | Personal skill folder |
+| --- | --- |
+| OpenAI Codex | `~/.agents/skills/healthcare-clinical-workflow-analyst/` |
+| Claude Code | `~/.claude/skills/healthcare-clinical-workflow-analyst/` |
+
+In both cases, `SKILL.md` must be directly inside that final folder.
+
+### Requirements and updates
+
+The one-command installer requires Node.js and `npx`. The no-terminal route does not.
+
+To choose a different compatible agent interactively:
 
 ```bash
 npx -y skills add Skharbi/Clinical-workflow-analysis
 ```
-
-Requires Node.js and `npx`. Users who cannot run Node.js can download the repository ZIP and place the extracted `healthcare-clinical-workflow-analyst` folder in their agent's supported skills directory.
 
 To update later:
 
 ```bash
 npx skills update
 ```
+
+Platform references: [OpenAI skills documentation](https://learn.chatgpt.com/docs/build-skills) and [Anthropic skills documentation](https://code.claude.com/docs/en/skills).
 
 ## Package structure
 

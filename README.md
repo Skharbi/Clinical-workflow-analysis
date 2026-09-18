@@ -22,7 +22,23 @@ Those practices complement healthcare safety and informatics guidance; they do n
 
 It is not a clinical decision-support system and must not be used for patient-specific diagnosis, treatment selection, prescribing, or dosing.
 
-## Install — choose your AI
+## Use it on ChatGPT mobile
+
+This repository is now packaged as a portable, skills-only OpenAI plugin. The plugin must be reviewed and published in OpenAI's universal Plugins Directory before it can be installed in the ChatGPT mobile app.
+
+Current status: **package ready for submission; public mobile installation is not live until OpenAI approves it.**
+
+Publisher steps:
+
+1. Sign in to the [OpenAI plugin submission portal](https://platform.openai.com/apps-manage).
+2. Select **Create plugin → Skills only**.
+3. Upload the plugin package from this repository.
+4. Complete publisher verification, listing details, starter prompts, test cases, availability, and policy attestations.
+5. Submit it for OpenAI review.
+
+After approval, users can open the Plugins Directory in ChatGPT mobile, search for **Healthcare Clinical Workflow Analyst**, and install it. No terminal command will be required on mobile.
+
+## Install for local agents
 
 | Product | Fastest setup |
 | --- | --- |
@@ -53,7 +69,7 @@ npx -y skills add Skharbi/Clinical-workflow-analysis --skill healthcare-clinical
 
 Then restart Claude Code. Type `/healthcare-clinical-workflow-analyst` to invoke it, or use `/skills` to confirm that it is installed.
 
-### No terminal: ChatGPT desktop, Claude.ai, or Cowork
+### No terminal: desktop products
 
 1. [Download the ZIP](https://github.com/Skharbi/Clinical-workflow-analysis/archive/refs/heads/main.zip).
 2. Extract it. The folder containing `SKILL.md` is the skill folder.
@@ -61,7 +77,7 @@ Then restart Claude Code. Type `/healthcare-clinical-workflow-analyst` to invoke
    - **ChatGPT desktop:** open **Skills** in the sidebar and add the extracted skill folder. Invoke it with `@healthcare-clinical-workflow-analyst`.
    - **Claude.ai or Cowork:** open **Customize → Skills** (or the Skills settings on claude.ai), upload the ZIP, and enable it. Invoke it as `/healthcare-clinical-workflow-analyst` when available.
 
-Standalone OpenAI skills work in ChatGPT desktop, Codex CLI, and the Codex IDE extension. ChatGPT web and mobile require the skill to be distributed as an OpenAI plugin. A skill installed only in Claude Code's local folder is not automatically available in Claude.ai or Cowork; upload and enable it in Claude's Skills settings.
+Standalone OpenAI skills work in ChatGPT desktop, Codex CLI, and the Codex IDE extension. ChatGPT mobile uses the published plugin described above. A skill installed only in Claude Code's local folder is not automatically available in Claude.ai or Cowork; upload and enable it in Claude's Skills settings.
 
 ### Manual folder locations
 
@@ -94,15 +110,15 @@ Platform references: [OpenAI skills documentation](https://learn.chatgpt.com/doc
 
 ## Package structure
 
-- `SKILL.md`: activation, method, boundaries, output behavior, and quality checks
-- `KNOWLEDGE_BASE.md`: core healthcare workflow and informatics domain model
-- `references/`: focused topic guidance loaded only when relevant
-- `templates/`: reusable analysis artifacts
-- `examples/`: realistic demonstrations with explicit assumptions
-- `evals/`: trigger cases, behavior cases, and scoring rubric
+- `plugin.json`: portable Agent Plugins manifest for ChatGPT and Codex distribution
+- `skills/healthcare-clinical-workflow-analyst/SKILL.md`: activation, method, boundaries, output behavior, and quality checks
+- `skills/healthcare-clinical-workflow-analyst/KNOWLEDGE_BASE.md`: core healthcare workflow and informatics domain model
+- `skills/healthcare-clinical-workflow-analyst/references/`: focused topic guidance loaded only when relevant
+- `skills/healthcare-clinical-workflow-analyst/templates/`: reusable analysis artifacts
+- `skills/healthcare-clinical-workflow-analyst/examples/`: realistic demonstrations with explicit assumptions
+- `skills/healthcare-clinical-workflow-analyst/evals/`: trigger cases, behavior cases, and scoring rubric
 - `tests/validate_package.py`: deterministic package integrity test
-- `PROJECT_SCOPE.md`: product boundaries and release gates
-- `SOURCES.md`: authoritative evidence registry
+- `PRIVACY.md`, `TERMS.md`, and `SUPPORT.md`: public submission policies and support route
 
 ## Validate
 

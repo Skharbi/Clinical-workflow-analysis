@@ -1,0 +1,43 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "healthcare-clinical-workflow-analyst",
+  "version": "0.3.0",
+  "description": "Safety-aware healthcare workflow analysis for clinical operations, medication systems, health IT, requirements, risks, testing, and implementation readiness.",
+  "author": {
+    "name": "Saleh Alharbi",
+    "url": "https://github.com/Skharbi"
+  },
+  "homepage": "https://github.com/Skharbi/Clinical-workflow-analysis",
+  "repository": "https://github.com/Skharbi/Clinical-workflow-analysis",
+  "license": "MIT",
+  "keywords": [
+    "healthcare",
+    "clinical-informatics",
+    "workflow-analysis",
+    "medication-safety",
+    "business-analysis"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Healthcare Clinical Workflow Analyst",
+        "shortDescription": "Analyze healthcare workflows safely and systematically.",
+        "longDescription": "Analyze AS-IS and TO-BE healthcare workflows, stakeholders, requirements, interoperability, medication technology, downtime, risks, acceptance criteria, and implementation readiness while preserving uncertainty and human governance.",
+        "developerName": "Saleh Alharbi",
+        "category": "Productivity",
+        "capabilities": ["Read"],
+        "websiteURL": "https://github.com/Skharbi/Clinical-workflow-analysis",
+        "privacyPolicyURL": "https://github.com/Skharbi/Clinical-workflow-analysis/blob/main/PRIVACY.md",
+        "termsOfServiceURL": "https://github.com/Skharbi/Clinical-workflow-analysis/blob/main/TERMS.md",
+        "defaultPrompt": [
+          "Analyze this healthcare workflow and identify gaps, risks, requirements, and open questions.",
+          "Review this medication-technology workflow for safety, interoperability, downtime, testing, and readiness.",
+          "Create traceable requirements and acceptance criteria for this clinical workflow change."
+        ],
+        "brandColor": "#0B6E75",
+        "composerIcon": "./assets/icon.svg",
+        "logo": "./assets/icon.svg"
+      }
+    }
+  }
+}

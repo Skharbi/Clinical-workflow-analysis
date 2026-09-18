@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" role="img" aria-labelledby="title desc">
+  <title id="title">Healthcare Clinical Workflow Analyst</title>
+  <desc id="desc">A clinical workflow problem is transformed into structured analysis and a testable implementation plan.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071A2B"/>
+      <stop offset="1" stop-color="#123E56"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#020A12" flood-opacity="0.34"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="480" rx="28" fill="url(#background)"/>
+  <circle cx="1085" cy="58" r="150" fill="#2DD4BF" opacity="0.08"/>
+  <circle cx="112" cy="455" r="190" fill="#38BDF8" opacity="0.07"/>
+
+  <g transform="translate(70 54)">
+    <rect width="48" height="48" rx="12" fill="#2DD4BF"/>
+    <path d="M14 24h20M24 14v20" stroke="#062437" stroke-width="5" stroke-linecap="round"/>
+    <text x="66" y="22" fill="#F8FAFC" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="30" font-weight="700">Healthcare Clinical Workflow Analyst</text>
+    <text x="66" y="49" fill="#B9D7E5" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="17">A practical Agent Skill for healthcare informatics work</text>
+  </g>
+
+  <g filter="url(#shadow)" font-family="Inter,Segoe UI,Arial,sans-serif">
+    <g transform="translate(70 165)">
+      <rect width="300" height="126" rx="18" fill="#102F43" stroke="#31566B"/>
+      <circle cx="36" cy="36" r="17" fill="#FB7185" opacity="0.95"/>
+      <path d="M28 36h16M36 28v16" stroke="#40151D" stroke-width="3" stroke-linecap="round" transform="rotate(45 36 36)"/>
+      <text x="66" y="42" fill="#FFFFFF" font-size="19" font-weight="700">Messy clinical problem</text>
+      <text x="26" y="78" fill="#B9D7E5" font-size="15">Workarounds · handoffs · delays</text>
+      <text x="26" y="102" fill="#B9D7E5" font-size="15">Unknown causes · missing ownership</text>
+    </g>
+
+    <path d="M390 228h55" stroke="#5BC0DE" stroke-width="4" stroke-linecap="round"/>
+    <path d="m437 217 12 11-12 11" fill="none" stroke="#5BC0DE" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(465 165)">
+      <rect width="270" height="126" rx="18" fill="#E8F6FA"/>
+      <circle cx="36" cy="36" r="17" fill="#38BDF8"/>
+      <path d="M27 36h18M31 30h10M31 42h10" stroke="#083047" stroke-width="2.5" stroke-linecap="round"/>
+      <text x="66" y="42" fill="#092436" font-size="19" font-weight="700">Structured analysis</text>
+      <text x="26" y="78" fill="#31566B" font-size="15">AS-IS · evidence · risks</text>
+      <text x="26" y="102" fill="#31566B" font-size="15">TO-BE · data · exceptions</text>
+    </g>
+
+    <path d="M755 228h55" stroke="#5BC0DE" stroke-width="4" stroke-linecap="round"/>
+    <path d="m802 217 12 11-12 11" fill="none" stroke="#5BC0DE" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(830 165)">
+      <rect width="300" height="126" rx="18" fill="#DDFBF5"/>
+      <circle cx="36" cy="36" r="17" fill="#2DD4BF"/>
+      <path d="m28 36 6 6 11-14" fill="none" stroke="#073B35" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="66" y="42" fill="#073B35" font-size="19" font-weight="700">Testable implementation plan</text>
+      <text x="26" y="78" fill="#285B57" font-size="15">Requirements · controls · UAT</text>
+      <text x="26" y="102" fill="#285B57" font-size="15">Downtime · readiness evidence</text>
+    </g>
+  </g>
+
+  <g transform="translate(70 349)" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="14" font-weight="600">
+    <g><rect width="170" height="42" rx="21" fill="#163E54" stroke="#2E6077"/><text x="85" y="27" text-anchor="middle" fill="#D9F1F8">Medication systems</text></g>
+    <g transform="translate(184)"><rect width="128" height="42" rx="21" fill="#163E54" stroke="#2E6077"/><text x="64" y="27" text-anchor="middle" fill="#D9F1F8">Human factors</text></g>
+    <g transform="translate(326)"><rect width="138" height="42" rx="21" fill="#163E54" stroke="#2E6077"/><text x="69" y="27" text-anchor="middle" fill="#D9F1F8">Interoperability</text></g>
+    <g transform="translate(478)"><rect width="114" height="42" rx="21" fill="#163E54" stroke="#2E6077"/><text x="57" y="27" text-anchor="middle" fill="#D9F1F8">Downtime</text></g>
+    <g transform="translate(606)"><rect width="144" height="42" rx="21" fill="#163E54" stroke="#2E6077"/><text x="72" y="27" text-anchor="middle" fill="#D9F1F8">Requirements</text></g>
+    <g transform="translate(764)"><rect width="116" height="42" rx="21" fill="#163E54" stroke="#2E6077"/><text x="58" y="27" text-anchor="middle" fill="#D9F1F8">Validation</text></g>
+  </g>
+</svg>

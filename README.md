@@ -2,6 +2,8 @@
 
 An open-source Agent Skill for structured, safety-aware analysis of healthcare operations and health IT workflows.
 
+![Healthcare Clinical Workflow Analyst overview](assets/workflow-analyst-overview.svg)
+
 It helps an AI agent examine AS-IS and TO-BE workflows, stakeholder responsibilities, requirements, interoperability, medication technology, downtime, risks, acceptance criteria, and validation without inventing local policy or replacing clinical governance.
 
 Its project and business-analysis discipline is aligned with adaptable PMI and IIBA practices:
@@ -20,9 +22,29 @@ Those practices complement healthcare safety and informatics guidance; they do n
 
 It is not a clinical decision-support system and must not be used for patient-specific diagnosis, treatment selection, prescribing, or dosing.
 
-## Install
+## Install in one command
 
-Place the `healthcare-clinical-workflow-analyst` directory in the skills directory supported by your agent environment. Invoke it explicitly as `$healthcare-clinical-workflow-analyst`, or allow normal automatic discovery.
+For Codex, run:
+
+```bash
+npx -y skills add Skharbi/Clinical-workflow-analysis --skill healthcare-clinical-workflow-analyst --global --agent codex --yes
+```
+
+That is the complete installation. Restart Codex if it is already open, then use the skill normally or invoke it explicitly as `$healthcare-clinical-workflow-analyst`.
+
+The same installer supports other compatible agents. Omit `--agent codex` to select the target interactively:
+
+```bash
+npx -y skills add Skharbi/Clinical-workflow-analysis
+```
+
+Requires Node.js and `npx`. Users who cannot run Node.js can download the repository ZIP and place the extracted `healthcare-clinical-workflow-analyst` folder in their agent's supported skills directory.
+
+To update later:
+
+```bash
+npx skills update
+```
 
 ## Package structure
 

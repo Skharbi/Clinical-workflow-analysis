@@ -17,6 +17,7 @@ REQUIRED = {
     "LICENSE",
     "agents/openai.yaml",
     "assets/icon.svg",
+    "assets/workflow-analyst-overview.svg",
     "references/safety-and-human-factors.md",
     "references/evidence-and-uncertainty.md",
     "references/workflow-analysis.md",

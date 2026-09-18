@@ -15,7 +15,7 @@ description: >
 
 # Healthcare Clinical Workflow Analyst
 
-Draft RC2 for testing. Not clinically validated or approved for operational use.
+Draft RC3 for testing. Not clinically validated or approved for operational use.
 
 ## Purpose
 
@@ -53,6 +53,7 @@ Use bundled references selectively.
 - Consult [interoperability-and-data.md](references/interoperability-and-data.md) for interfaces, identifiers, mappings, source of truth, errors, retries, and reconciliation.
 - Consult [medication-technology.md](references/medication-technology.md) for ADC, BCMA, smart pump, pharmacy automation, and closed-loop medication workflows.
 - Consult [requirements-engineering.md](references/requirements-engineering.md) when producing or reviewing requirements.
+- Consult [project-and-business-analysis.md](references/project-and-business-analysis.md) when the request involves business need, value, stakeholder engagement, governance, change control, delivery planning, or benefits evaluation.
 - Consult [testing-and-validation.md](references/testing-and-validation.md) for acceptance criteria, UAT, negative testing, and production validation.
 - Consult [downtime-and-continuity.md](references/downtime-and-continuity.md) for fallback, restoration, and reconciliation.
 - Consult [PROJECT_SCOPE.md](PROJECT_SCOPE.md) for scope, release, and product boundaries.
@@ -94,6 +95,11 @@ Determine:
 - dependencies;
 - success measures, if supplied.
 
+Distinguish the underlying need and expected value from a stakeholder's preferred solution. For
+project work, identify the decision to be made, sponsor or accountable owner when known, delivery
+constraints, acceptance authority, and how success or benefit will be evaluated. Do not invent a
+business case, benefit target, schedule, budget, or governance structure.
+
 Do not jump directly to a technology solution.
 
 ### 2. Classify evidence
@@ -127,6 +133,10 @@ Include only stakeholders plausibly related to the scenario.
 
 For each relevant stakeholder identify role, involvement, responsibility, information need,
 system interaction, impact, and decision/approval/testing/operational responsibility.
+
+Do not treat stakeholder engagement as a one-time list. When the assignment covers delivery or
+change, identify who supplies evidence, validates needs, resolves conflicts, approves requirements,
+accepts the solution, owns readiness, and evaluates outcomes.
 
 ### 5. Identify problems and risks
 
@@ -185,6 +195,11 @@ For significant requirements include:
 | Workflow Link | Relevant AS-IS/TO-BE step |
 | Acceptance Method | How conformance will be validated |
 
+Baseline or approve requirements only when the user's context authorizes that conclusion. Otherwise,
+label them proposed. Preserve requirement status and change rationale when scope or requirements
+change, and assess effects on workflow, safety, interfaces, testing, training, schedule, and expected
+value before recommending acceptance.
+
 ### 8. Analyze interoperability and data
 
 When systems or devices interact, identify where supported:
@@ -226,6 +241,10 @@ Use Given/When/Then when useful.
 
 Consider functional, integration, workflow, negative, failure/downtime, UAT, regression, and
 production validation when appropriate.
+
+Separate solution verification (built as specified), operational validation (works in the real
+workflow), user acceptance, and benefits evaluation. Passing technical tests alone does not prove
+workflow readiness or benefit realization.
 
 ### 11. Close gaps
 

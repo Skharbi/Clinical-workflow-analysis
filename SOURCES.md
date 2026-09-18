@@ -12,6 +12,25 @@ The skill must distinguish external guidance from local organizational policy an
 **Use:** Workflow definition, workflow mapping, process assessment, health IT implementation and redesign.  
 **URL:** https://digital.ahrq.gov/health-it-tools-and-resources/evaluation-resources/workflow-assessment-health-it-toolkit
 
+## Project and business analysis
+
+### Project Management Institute (PMI)
+
+**Resource:** The PMI Guide to Business Analysis
+**Use:** Business need, stakeholder engagement, high-quality requirements, outcome focus, and
+tailoring business analysis across delivery approaches.
+**URL:** https://www.pmi.org/standards/business-analysis
+
+### International Institute of Business Analysis (IIBA)
+
+**Resource:** A Guide to the Business Analysis Body of Knowledge (BABOK Guide)
+**Use:** Business-analysis foundation, needs and value, stakeholder context, requirements life cycle,
+strategy analysis, solution evaluation, and context-appropriate techniques.
+**URL:** https://www.iiba.org/career-resources/a-business-analysis-professionals-foundation-for-success/babok/
+
+PMI and IIBA practices guide project and business-analysis discipline. They do not establish local
+clinical policy, regulatory compliance, technical architecture, or patient-safety approval.
+
 ## Health IT safety
 
 ### ASTP/ONC SAFER Guides

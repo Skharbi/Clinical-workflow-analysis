@@ -1,7 +1,7 @@
 # Healthcare Clinical Workflow Analyst — Project Scope
 
 **Version:** 1.1  
-**Project status:** Foundation / pre-evaluation  
+**Project status:** RC3 / behavioral evaluation
 **Project type:** Open-source Agent Skill  
 **Domain:** Healthcare informatics, clinical workflow, medication-use technology, and health IT implementation  
 **Last reviewed:** 2026-09-16
@@ -55,6 +55,8 @@ When appropriately triggered, the skill should help an AI agent:
 12. expose unresolved questions without inventing answers;
 13. maintain traceability from objective to validation;
 14. leave final clinical, technical, legal, regulatory, and governance decisions to qualified humans.
+15. distinguish business need and expected value from a proposed technology solution;
+16. preserve requirement status, change rationale, acceptance authority, and outcome evaluation when relevant.
 
 ---
 

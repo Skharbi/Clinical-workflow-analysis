@@ -15,13 +15,14 @@ REQUIRED = {
     "README.md",
     "CONTRIBUTING.md",
     "LICENSE",
-    "assets/workflow-analyst-overview.svg",
     "agents/openai.yaml",
+    "assets/icon.svg",
     "references/safety-and-human-factors.md",
     "references/evidence-and-uncertainty.md",
     "references/workflow-analysis.md",
     "references/interoperability-and-data.md",
     "references/medication-technology.md",
+    "references/project-and-business-analysis.md",
     "references/requirements-engineering.md",
     "references/testing-and-validation.md",
     "references/downtime-and-continuity.md",
@@ -37,40 +38,17 @@ REQUIRED = {
     "tests/validate_package.py",
 }
 
-IGNORED_DIRECTORIES = {
-    ".git",
-    ".mypy_cache",
-    ".pytest_cache",
-    ".ruff_cache",
-    "__pycache__",
-}
-
-IGNORED_FILES = {
-    ".DS_Store",
-}
-
 
 def fail(message: str) -> None:
     print(f"FAIL: {message}")
     raise SystemExit(1)
 
 
-def is_package_file(path: Path) -> bool:
-    """Return whether a file belongs to the distributable skill package."""
-    relative = path.relative_to(ROOT)
-    return (
-        path.is_file()
-        and not any(part in IGNORED_DIRECTORIES for part in relative.parts)
-        and path.name not in IGNORED_FILES
-        and path.suffix != ".pyc"
-    )
-
-
 missing = sorted(path for path in REQUIRED if not (ROOT / path).is_file())
 if missing:
     fail(f"missing required files: {', '.join(missing)}")
 
-actual = {str(path.relative_to(ROOT)) for path in ROOT.rglob("*") if is_package_file(path)}
+actual = {str(path.relative_to(ROOT)) for path in ROOT.rglob("*") if path.is_file()}
 if actual != REQUIRED:
     extra = sorted(actual - REQUIRED)
     missing_from_tree = sorted(REQUIRED - actual)

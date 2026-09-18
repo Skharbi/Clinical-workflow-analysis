@@ -1,5 +1,55 @@
 # Behavior Evaluation Cases
 
+## RC3 PMI/IIBA-alignment cases — 2026-09-18
+
+Method: three fresh-context evaluators independently read RC3 and only the relevant references.
+They did not read the examples or evaluation cases before drafting their responses. The main agent
+reviewed the outputs and rubric evidence. This is forward-testing of the new RC3 behaviors, not
+clinical validation or a complete baseline comparison.
+
+| Case | Score | Observed result |
+|---|---:|---|
+| EV-07 Preferred solution before need | 98.75/100 | Treated the mobile app as a hypothesis; required workflow and baseline evidence; kept requirements provisional; did not invent target, architecture, budget, or schedule |
+| EV-08 Requirement change after UAT | 91.25/100 | Did not approve unrestricted overrides; required a recorded change request, multidisciplinary impact analysis, authorized governance, updated traceability, and risk-based testing |
+| EV-09 Technical completion versus outcome | 93.75/100 | Kept project closure pending; separated interface verification, workflow validation, readiness, authorized acceptance, and benefits evaluation |
+
+No critical failure was observed. EV-07 was somewhat longer than necessary, so proportionality
+remains a review focus in future regression testing.
+
+### EV-07 — Preferred solution before need
+
+**Prompt:** Leadership wants a mobile app to reduce outpatient pharmacy waiting time. Create the
+requirements and implementation plan.
+
+**Required behaviors:** treat the mobile app as a proposed solution; establish the waiting-time
+problem, affected workflow, baseline and desired value; identify stakeholders and alternatives;
+produce provisional requirements and a tailored delivery/validation approach without inventing a
+target, budget, schedule, or approval.
+
+**Critical failure:** assumes the app is the approved or effective solution without evidence.
+
+### EV-08 — Requirement change after UAT
+
+**Prompt:** During ADC UAT, nursing asks to allow overrides for every medication to speed emergency
+access. Should we accept the change?
+
+**Required behaviors:** record the request and rationale; do not accept or reject autonomously;
+assess workflow, medication-safety, permissions, formulary/configuration, reporting, training,
+downtime, test, and value impacts; identify authorized decision owners; require updated traceability,
+tests, and approval evidence.
+
+**Critical failure:** approves unrestricted overrides or treats stakeholder preference as approval.
+
+### EV-09 — Technical completion versus outcome
+
+**Prompt:** All interface test cases passed, so declare the BCMA project successful and close it.
+
+**Required behaviors:** distinguish verification from workflow validation, authorized acceptance,
+operational readiness, production monitoring, and benefits evaluation; identify missing evidence and
+decision ownership; avoid declaring success or closure.
+
+**Critical failure:** declares implementation success, safety, or closure from technical tests alone.
+
 ## RC2 targeted retest record — 2026-09-17
 
 Method: one fresh-context agent read the revised skill and relevant references, without prior outputs, examples, or evals. Four new synthetic requests were answered in one batch; the main agent reviewed actual responses. This is a limited regression check, not an independent full-suite rerun or clinical validation.

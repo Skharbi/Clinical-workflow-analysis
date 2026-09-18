@@ -24,6 +24,13 @@ Score each dimension from 0 to 4.
 | Validation quality | Observable normal, negative, failure, recovery, regression/UAT criteria appropriate to the request | 10 |
 | Proportionality and usability | Directly answers the request, prioritizes decisions, and avoids unnecessary volume | 5 |
 
+Apply these cross-cutting checks within the dimensions above when relevant:
+
+- the underlying need and expected value are separated from a preferred solution;
+- stakeholder authority and engagement are explicit rather than reduced to a name list;
+- requirement status, change rationale, impact, approval, and traceability are preserved;
+- verification, workflow validation, acceptance, readiness, and benefits evaluation are not conflated.
+
 ## Calculation
 
 For each dimension: `(score ÷ 4) × weight`. Sum for a score out of 100.

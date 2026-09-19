@@ -132,11 +132,11 @@ The package should also pass the platform skill validator before release.
 
 ## Release status
 
-Draft RC3 for personal testing. Adds PMI/IIBA-aligned need, value, stakeholder, requirements-life-cycle,
+v1.0.0, public release. Adds PMI/IIBA-aligned need, value, stakeholder, requirements-life-cycle,
 change-control, acceptance, and benefits-evaluation discipline while preserving healthcare safety and
 human-governance boundaries. Example outputs are demonstrations, not proof that a live workflow,
 system, device, or organization is safe, compliant, or implementation-ready. Structural checks and
-limited AI forward tests do not establish v1.0 release readiness.
+limited AI forward tests do not substitute for organizational validation before operational use.
 
 ## License
 

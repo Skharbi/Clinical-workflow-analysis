@@ -82,6 +82,48 @@ Use [trigger-cases.md](evals/trigger-cases.md), [behavior-cases.md](evals/behavi
 For a full analysis, follow the sequence below. For a focused request, execute only the relevant
 parts while preserving the same reasoning principles.
 
+Never execute the full sequence automatically in an interactive conversation. Progress through it
+as information becomes available unless the user explicitly requests a complete analysis.
+
+## Progressive interaction and conversation control
+
+Do not dump the full analytical framework while the user is still describing the scenario.
+
+For conversational workflow analysis:
+
+1. Start with the user's immediate context. Briefly acknowledge what is known. Do not explain the
+   entire methodology unless requested.
+2. Progress one analytical step at a time. Ask only the question, or small group of questions,
+   needed for the current step. Prefer one high-value question at a time during discovery.
+3. Do not prematurely generate a full AS-IS or TO-BE workflow, requirements set, risk register,
+   interoperability assessment, downtime plan, test plan, or implementation plan unless enough
+   information has been supplied or the user explicitly requests that artifact.
+4. Do not overwhelm the user with unknowns. Track missing information during the conversation and
+   surface only what is necessary for the current decision or question. Consolidate remaining gaps
+   later when producing a formal analysis.
+5. Match response depth to user intent. A short scenario statement should receive a short response
+   that advances discovery, not a complete report.
+6. Use progressive disclosure: discovery first, analysis second, recommendations or design third,
+   then requirements and validation after the workflow is sufficiently understood.
+7. When the user is testing the skill, do not coach the test unless explicitly asked. Respond
+   naturally as the skill would in real use. Do not grade yourself, reveal evaluation criteria, or
+   tell the user how to test the skill.
+8. Keep conversational responses concise by default. Use the minimum detail required to move the
+   analysis forward and expand only when complexity requires it or the user requests more detail.
+
+Example:
+
+User: "I am planning to implement an anesthesia station in the OR."
+
+Preferred response:
+
+"Understood — this is a new OR anesthesia-station implementation.
+
+First, how are anesthesia medications supplied and managed in the OR today?"
+
+Do not respond at this stage with the complete implementation framework, risk register, integration
+assessment, requirements set, downtime plan, or test plan.
+
 ### 1. Frame the problem
 
 Determine:

@@ -124,6 +124,7 @@ First, how are anesthesia medications supplied and managed in the OR today?"
 Do not respond at this stage with the complete implementation framework, risk register, integration
 assessment, requirements set, downtime plan, or test plan.
 
+
 ### 1. Frame the problem
 
 Determine:
@@ -298,6 +299,22 @@ Prioritize unresolved items:
 
 Do not stop useful analysis because non-blocking information is missing. Continue with explicit
 assumptions.
+
+### 12. Stop the analysis
+
+Ask clarification questions only when missing information blocks a safe and useful analysis. Ask
+blocking questions together in one batch, with a maximum of five questions. If remaining unknowns
+are non-blocking, proceed using explicit assumptions and prioritized open questions.
+
+End the current analysis when:
+
+- the requested deliverable is complete at the appropriate level of detail;
+- critical workflow, safety, data, downtime, and validation gaps relevant to the request are identified;
+- remaining blockers state the decision owner or evidence needed; and
+- the next decision or action is clear.
+
+Do not keep asking questions only to eliminate every unknown or optimization item. Reopen or deepen
+the analysis when the user provides new evidence, changes scope, or requests another phase.
 
 ## Traceability
 

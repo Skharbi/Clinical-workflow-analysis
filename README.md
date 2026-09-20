@@ -92,19 +92,27 @@ Live regression evaluation compares a generic baseline with the skill-assisted a
 against the repository rubric, blocks on critical failures, and writes `eval-results/results.json`
 plus `eval-results/report.md`.
 
+The runner supports DeepSeek and OpenAI. Provider selection defaults to `auto`: DeepSeek is preferred
+when `DEEPSEEK_API_KEY` is present, otherwise OpenAI is used when `OPENAI_API_KEY` is present.
+
 ```bash
 python -m pip install --upgrade openai
-export OPENAI_API_KEY="..."
+
+# DeepSeek
+export DEEPSEEK_API_KEY="..."
 python evals/run_evals.py --suite smoke
-python evals/run_evals.py --suite full
+
+# OpenAI fallback
+export OPENAI_API_KEY="..."
+python evals/run_evals.py --provider openai --suite smoke
 ```
 
-Available suites are `smoke`, `full`, `trigger`, `behavior`, and `independent`. The default
-live model and judge model are `gpt-5.6-luna`; override them with `EVAL_MODEL` and
-`EVAL_JUDGE_MODEL` when needed.
+Available suites are `smoke`, `full`, `trigger`, `behavior`, and `independent`. DeepSeek
+defaults to `deepseek-flash`; OpenAI defaults to `gpt-5.6-luna`. Override either model with
+`EVAL_MODEL` and `EVAL_JUDGE_MODEL`.
 
-GitHub Actions runs deterministic validation on every pull request and push to `main`. When the
-repository secret `OPENAI_API_KEY` is configured, pull requests also run the live smoke suite.
+GitHub Actions runs deterministic validation on every pull request and push to `main`. When either
+`DEEPSEEK_API_KEY` or `OPENAI_API_KEY` is configured, pull requests also run the live smoke suite.
 Manual and weekly scheduled runs can execute the full suite and upload the machine-readable and
 Markdown reports as workflow artifacts.
 
@@ -112,12 +120,11 @@ The package should also pass the platform skill validator before release.
 
 ## Release status
 
-v1.0.4, automated-evaluation release candidate. It keeps the v1.0.3 discovery, event-semantics,
-decision-focused output, PDF/report, and executive-email safeguards while adding a machine-readable
-evaluation registry, automated baseline-versus-skill scoring, trigger classification, critical-failure
-release gates, GitHub Actions CI, and seven independent regression scenarios spanning medication and
-non-medication clinical workflows. Automated evaluation is regression evidence, not clinical
-validation, compliance certification, or organizational approval.
+v1.0.5, multi-provider evaluation release candidate. It keeps the v1.0.4 automated regression
+pipeline and adds DeepSeek as the preferred CI evaluation provider with OpenAI fallback. The runner
+uses the same case registry, scoring rubric, critical-failure gate, and report format across providers,
+which reduces dependence on a single model vendor. Automated evaluation is regression evidence, not
+clinical validation, compliance certification, or organizational approval.
 
 ## License
 

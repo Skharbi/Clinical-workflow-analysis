@@ -15,7 +15,7 @@ description: >
 
 # Healthcare Clinical Workflow Analyst
 
-v1.0.5. Not clinically validated or approved for operational use without organizational review.
+v1.0.6. Not clinically validated or approved for operational use without organizational review.
 
 ## Purpose
 

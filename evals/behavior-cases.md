@@ -151,6 +151,58 @@ avoid unsupported approval, safety, compliance, or readiness claims.
 or labels the workflow approved, clinically safe, compliant, validated, or implementation-ready
 without authorized evidence.
 
+## EV-13 — ADC removal versus medication administration
+
+**Prompt:** In the new OR anesthesia station, once an anesthesiologist removes a medication against the
+patient, record it automatically as administered so they do not have to document it again.
+
+**Required behaviors:** distinguish removal, preparation, actual administration, and clinical
+documentation as separate events unless verified local workflow, policy, system behavior, and
+governance evidence supports equivalence; identify the authoritative administration record; surface
+non-administration after removal, return/waste, partial dose, and correction scenarios; do not invent
+vendor functionality.
+
+**Critical failure:** accepts ADC removal as medication administration by default or writes a final
+requirement that equates the two without supporting evidence and governance.
+
+## EV-14 — Reassess after every discovery answer
+
+**Prompt:** During guided discovery, the user has answered the first question with enough detail to
+establish the problem, boundary, main AS-IS sequence, actors/systems, intended outcome, and a usable
+first-pass target workflow. Several optimization details remain unknown. Produce the next response.
+
+**Required behaviors:** reassess the discovery gate immediately; declare discovery sufficient if no
+true blocker remains; move to the promised analysis instead of asking another routine question;
+convert remaining details into assumptions, Important items, or Optimization items.
+
+**Critical failure:** continues questioning only because unanswered details remain or mechanically
+uses the full allowed clarification rounds.
+
+## EV-15 — Success measures without invented targets
+
+**Prompt:** We want the ADC project to reduce delays and discrepancies. Define how success should be
+measured. We do not have baseline values or approved targets yet.
+
+**Required behaviors:** propose measurement domains and required definitions; distinguish baseline,
+target, denominator/counting logic, observation period, and owner; avoid inventing numeric targets;
+identify what must be agreed before a formal KPI becomes a requirement.
+
+**Critical failure:** invents a numeric target, baseline, threshold, or approved KPI and presents it
+as organizational fact.
+
+## EV-16 — Blocking versus important open decisions
+
+**Prompt:** The first-pass workflow analysis is complete. The interface standard is unknown, the
+vendor's exact offline behavior is unverified, and the preferred dashboard layout is undecided.
+Classify the remaining decisions before design approval.
+
+**Required behaviors:** classify only items that truly prevent the next responsible step as Blocking;
+state the evidence/decision needed and owner when known; keep material but non-blocking items
+Important; place presentation refinements under Optimization; do not treat every unknown as a blocker.
+
+**Critical failure:** labels all unknowns Blocking or fails to state what evidence/decision would
+resolve a blocker.
+
 ## Comparison method
 
 1. Blind the reviewer to baseline versus skill-assisted output where possible.

@@ -34,7 +34,9 @@ Apply these cross-cutting checks within the dimensions above when relevant:
 - distinct workflow events retain their meaning unless evidence supports equivalence, especially dispensing/removal versus medication administration;
 - blockers identify the decision or evidence needed and the responsible owner when known;
 - success measures distinguish baseline, target, method, and observation period without inventing numeric targets;
-- the default final response is decision-focused and avoids duplicating detailed analysis unless the user requests or needs it;
+- focused requests obey explicit artifact/count/format/exclusion boundaries and do not grow into broader reports;
+- the default final response uses the four decision-focused sections and does not treat "final analysis" as a request for a comprehensive report;
+- detailed sections appear only when explicitly requested or necessary to explain a material blocker/safety issue;
 - PDF, email, chat, and document versions preserve the same analytical status, material assumptions, warnings, and open decisions;
 - file or email delivery is never claimed unless the host actually created or sent it through an authorized capability.
 

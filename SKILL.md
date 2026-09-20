@@ -460,20 +460,36 @@ For a full workflow analysis, separate **analysis depth** from **delivery format
 
 ### Default analysis depth
 
-Unless the user explicitly asks for a comprehensive report, keep the primary response decision-focused:
+Unless the user explicitly asks for a comprehensive report, keep the primary response decision-focused.
+A request for a **final analysis**, **first-pass analysis**, or **analysis now** does not by itself mean
+"full report."
+
+Default to exactly these four primary sections:
 
 1. **Decision Brief** — problem, bottom line, expected change, primary concern, and one next action.
 2. **Workflow at a Glance** — concise Current State / Target State / Main Impact comparison.
 3. **Priority Findings** — only findings that materially affect the decision, with evidence status and action.
 4. **Open Decisions and Next Action** — Blocking, Important, and Optimization items, followed by one clear next action.
 
-Add a **Detailed Analysis** section only when:
-- the user requests a full/comprehensive analysis;
-- the detail is necessary to support the current decision; or
-- a safety, interoperability, downtime, requirement, or validation issue would otherwise be obscured.
+For the default final analysis:
+- keep Priority Findings to the smallest set needed to support the decision, normally about three to
+  five;
+- summarize safety, interoperability, downtime, requirement, and validation implications inside the
+  four sections rather than automatically creating separate detailed sections;
+- do not add stakeholder inventories, full requirement tables, interface inventories, validation
+  plans, or implementation plans unless the user asks for them or one is necessary to explain a
+  true blocker;
+- rely on facts already supplied in the conversation and do not create new scenario details merely
+  to make the final answer look complete.
 
-Do not repeat the same fact across the Decision Brief, findings, risks, requirements, and open
-decisions unless repetition is necessary for traceability.
+Add a **Detailed Analysis** section only when:
+- the user explicitly requests a full, comprehensive, detailed, or formal analysis/report; or
+- one specific detail is necessary to explain a material safety issue or blocker that cannot be
+  responsibly summarized in the four primary sections.
+
+When detail is necessary, include only that detail; do not automatically expand every analytical
+domain. Do not repeat the same fact across the Decision Brief, findings, risks, requirements, and
+open decisions unless repetition is necessary for traceability.
 
 ### Delivery formats
 

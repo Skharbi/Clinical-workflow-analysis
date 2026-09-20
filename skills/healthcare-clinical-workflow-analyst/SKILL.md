@@ -343,12 +343,15 @@ workflow readiness or benefit realization.
 
 Prioritize unresolved items:
 
-- **Blocking**
-- **Important**
-- **Optimization**
+- **Blocking** — the missing decision or evidence prevents a responsible next step. State the
+  decision/evidence needed and the responsible owner when known.
+- **Important** — material to design, testing, operations, or governance but does not prevent a
+  useful provisional analysis.
+- **Optimization** — improves efficiency, usability, reporting, or refinement after the core
+  workflow is understood.
 
 Do not stop useful analysis because non-blocking information is missing. Continue with explicit
-assumptions.
+assumptions. Do not label an item Blocking merely because it is unknown.
 
 ### 12. Stop the analysis
 

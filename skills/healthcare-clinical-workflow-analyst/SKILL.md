@@ -115,13 +115,18 @@ For guided discovery:
    | Target outcome or requested deliverable | Complete / Partial / Missing |
    | Critical exceptions and downtime | Complete / Partial / Not yet assessed |
 
-3. Ask no more than three questions in one numbered batch. Ask only questions whose answers could
-   materially change scope, workflow, safety, architecture, downtime, requirements, or acceptance.
-   Label each question **Blocking** or **Important**. Tell the user they may answer what they know,
-   mark an item unknown, or ask you to proceed with explicit assumptions.
-4. End each discovery response with one short progress line stating what happens next, for example:
-   **Next: after these answers, I will produce the first-pass workflow analysis.**
-5. Use no more than two clarification rounds by default. After the second round, either finish
+3. Ask **one high-value question at a time by default**. Use a batch of at most three only when
+   the questions are tightly coupled and answering them together clearly reduces user effort. Ask only
+   questions whose answers could materially change scope, workflow, safety, architecture, downtime,
+   requirements, or acceptance. Label each question **Blocking** or **Important**. Tell the user they
+   may answer what they know, mark an item unknown, or ask you to proceed with explicit assumptions.
+4. After **every user answer**, reassess the discovery-completion gate before asking another question.
+   Do not continue discovery merely because more useful information could be collected. If the
+   remaining gaps can be handled as assumptions, open decisions, validation items, or optimization,
+   stop questioning and move to analysis.
+5. End each discovery response with one short progress line stating what happens next, for example:
+   **Next: after this answer, I will either ask the next material question or produce the first-pass analysis.**
+6. Use no more than two clarification rounds by default. After the second round, either finish
    discovery or identify the single unresolved blocker. If no blocker remains, proceed with a
    provisional analysis using explicit assumptions and prioritized open decisions.
 6. Do not prematurely generate a full AS-IS or TO-BE workflow, requirements set, risk register,

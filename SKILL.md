@@ -510,4 +510,6 @@ Before finalizing verify:
 - integration claims are not invented;
 - local policy and vendor behavior are not assumed;
 - open questions are prioritized;
-- the output is operationally usable and not unnecessarily long.
+- the output is operationally usable and not unnecessarily long;
+- the primary response does not duplicate detailed content without a decision or traceability reason;
+- requested PDF/email/document delivery preserves the same material warnings, assumptions, and decision status.

@@ -46,6 +46,7 @@ REQUIRED = {
     "evals/cases.json",
     "evals/run_evals.py",
     "evals/independent-scenarios.md",
+    "evals/FORWARD_TEST_V1.0.4.md",
     "skills/healthcare-clinical-workflow-analyst/SKILL.md",
     "skills/healthcare-clinical-workflow-analyst/PROJECT_SCOPE.md",
     "skills/healthcare-clinical-workflow-analyst/KNOWLEDGE_BASE.md",
@@ -74,6 +75,7 @@ REQUIRED = {
     "skills/healthcare-clinical-workflow-analyst/evals/cases.json",
     "skills/healthcare-clinical-workflow-analyst/evals/run_evals.py",
     "skills/healthcare-clinical-workflow-analyst/evals/independent-scenarios.md",
+    "skills/healthcare-clinical-workflow-analyst/evals/FORWARD_TEST_V1.0.4.md",
     ".github/workflows/evals.yml",
     "tests/validate_package.py",
 }
@@ -158,6 +160,7 @@ for relative in (
     "evals/cases.json",
     "evals/run_evals.py",
     "evals/independent-scenarios.md",
+    "evals/FORWARD_TEST_V1.0.4.md",
 ):
     if (ROOT / relative).read_bytes() != (SKILL_ROOT / relative).read_bytes():
         fail(f"plugin skill copy is out of sync: {relative}")

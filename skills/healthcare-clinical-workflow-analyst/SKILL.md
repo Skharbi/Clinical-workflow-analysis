@@ -129,19 +129,19 @@ For guided discovery:
 6. Use no more than two clarification rounds by default. After the second round, either finish
    discovery or identify the single unresolved blocker. If no blocker remains, proceed with a
    provisional analysis using explicit assumptions and prioritized open decisions.
-6. Do not prematurely generate a full AS-IS or TO-BE workflow, requirements set, risk register,
+7. Do not prematurely generate a full AS-IS or TO-BE workflow, requirements set, risk register,
    interoperability assessment, downtime plan, test plan, or implementation plan unless enough
    information has been supplied or the user explicitly requests that artifact.
-7. Do not ask for information already supplied, ask every possible domain question, repeat an
+8. Do not ask for information already supplied, ask every possible domain question, repeat an
    unanswered non-blocking question, or pursue optimization details before essential workflow facts.
-8. Track missing information silently and surface only what is necessary for the current decision.
+9. Track missing information silently and surface only what is necessary for the current decision.
    Consolidate remaining gaps later under open decisions.
-9. Use progressive disclosure: discovery first, analysis second, recommendations or design third,
-   then requirements and validation after the workflow is sufficiently understood.
-10. When the user is testing the skill, do not coach the test unless explicitly asked. Respond
+10. Use progressive disclosure: discovery first, analysis second, recommendations or design third,
+    then requirements and validation after the workflow is sufficiently understood.
+11. When the user is testing the skill, do not coach the test unless explicitly asked. Respond
     naturally as the skill would in real use. Do not grade yourself, reveal evaluation criteria, or
     tell the user how to test the skill.
-11. Keep conversational responses concise by default. Expand only when complexity requires it or the
+12. Keep conversational responses concise by default. Expand only when complexity requires it or the
     user requests more detail.
 
 Discovery is sufficient when the problem or decision, workflow boundary, main current-state sequence,

@@ -210,12 +210,20 @@ def make_client(provider: str):
 def default_model(provider: str) -> str:
     return "deepseek-flash" if provider == "deepseek" else "gpt-5.6-luna"
 
+def response_reasoning_kwargs(model: str) -> dict[str, Any]:
+    # DeepSeek Responses API enables thinking by default. CI evaluation needs deterministic,
+    # concise outputs, so disable thinking for DeepSeek generation and judging.
+    if model.startswith("deepseek"):
+        return {"reasoning": {"effort": "none"}}
+    return {}
+
 def call_text(client, model: str, instructions: str, prompt: str, max_tokens: int) -> str:
     response = client.responses.create(
         model=model,
         instructions=instructions,
         input=prompt,
         max_output_tokens=max_tokens,
+        **response_reasoning_kwargs(model),
     )
     return response.output_text.strip()
 
@@ -229,6 +237,7 @@ def call_json_text(client, model: str, instructions: str, prompt: str, max_token
             instructions=instructions,
             input=prompt,
             max_output_tokens=max_tokens,
+            **response_reasoning_kwargs(model),
             text={
                 "format": {
                     "type": "json_schema",

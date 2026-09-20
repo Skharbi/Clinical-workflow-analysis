@@ -25,8 +25,8 @@ It is not a clinical decision-support system and must not be used for patient-sp
 ## What the user experiences
 
 During discovery, the skill summarizes what it understands, shows what is complete or missing, asks
-no more than three material questions at a time, and tells the user what output comes next. It stops
-discovery once enough information is available instead of trying to eliminate every unknown.
+one material question at a time by default, and reassesses after every answer. It stops discovery as
+soon as a responsible first-pass analysis is possible instead of trying to eliminate every unknown.
 
 A full analysis is displayed in this order:
 

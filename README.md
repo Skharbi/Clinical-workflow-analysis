@@ -123,11 +123,12 @@ The package should also pass the platform skill validator before release.
 
 ## Release status
 
-v1.0.5, multi-provider evaluation release candidate. It keeps the v1.0.4 automated regression
-pipeline and adds DeepSeek as the preferred CI evaluation provider with OpenAI fallback. The runner
-uses the same case registry, scoring rubric, critical-failure gate, and report format across providers,
-which reduces dependence on a single model vendor. Automated evaluation is regression evidence, not
-clinical validation, compliance certification, or organizational approval.
+v1.0.6, proportional-output release candidate. It keeps the v1.0.5 multi-provider regression
+pipeline and tightens two behaviors identified by the first full DeepSeek run: focused requests now
+treat explicit artifact/count/format exclusions as hard output boundaries, and a request for a final
+analysis no longer expands into a comprehensive report by default. EV-05 and EV-17 are promoted into
+the smoke suite to prevent regression. Automated evaluation is regression evidence, not clinical
+validation, compliance certification, or organizational approval.
 
 ## License
 

@@ -167,6 +167,14 @@ specific value is not visible, describe it as **not reproduced in the current me
 rather than inserting blanks. Ask for a restatement only when one specific missing value is a true
 blocker to the requested artifact.
 
+A request for a full/final analysis does **not** authorize reconstruction of missing scenario facts.
+If prior discovery details are not visible in the current context, never fill the AS-IS/TO-BE with a
+"typical" workflow or infer specific supply sources, systems, documentation methods, controlled-
+substance rules, interface architecture, staffing, or downtime behavior from the scenario name alone.
+Use only the state summary that is actually available, keep unsupported details Unknown/not reproduced,
+and make the full report complete through evidence status and open decisions rather than invented
+operational detail.
+
 When this gate is met, state:
 
 **Discovery complete — sufficient information is available for analysis.**

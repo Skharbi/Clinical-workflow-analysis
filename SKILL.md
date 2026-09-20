@@ -253,6 +253,12 @@ Use:
 Include automation, human verification, decision points, handoffs, exceptions, escalation,
 failure paths, downtime alternatives, restoration, and reconciliation when relevant.
 
+Preserve **event semantics**. Do not treat a device, inventory, dispensing, removal, preparation,
+administration, documentation, or reconciliation event as equivalent to another event unless the
+workflow, policy, system behavior, and governance evidence support that equivalence. In medication
+workflows, explicitly challenge proposals where an ADC removal or inventory transaction is intended
+to stand in for actual medication administration or clinical documentation.
+
 ### 7. Derive requirements
 
 Classify when useful:

@@ -30,7 +30,8 @@
     "defaultPrompt": [
       "Guide me through this healthcare workflow analysis, show discovery progress, and stop asking questions when enough information is available.",
       "Review this medication workflow for safety and readiness.",
-      "Create traceable requirements and acceptance criteria."
+      "Create traceable requirements and acceptance criteria.",
+      "Turn the final workflow analysis into a professional PDF-ready report or executive email summary."
     ],
     "brandColor": "#0B6E75",
     "composerIcon": "./assets/icon.svg",

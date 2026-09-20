@@ -81,24 +81,43 @@ Restart Claude Code. The skill is ready.
 
 ## Validate
 
-Run:
+Deterministic package and registry checks require no API key:
 
 ```bash
 python tests/validate_package.py
+python evals/run_evals.py --validate-only
 ```
+
+Live regression evaluation compares a generic baseline with the skill-assisted answer, scores both
+against the repository rubric, blocks on critical failures, and writes `eval-results/results.json`
+plus `eval-results/report.md`.
+
+```bash
+python -m pip install --upgrade openai
+export OPENAI_API_KEY="..."
+python evals/run_evals.py --suite smoke
+python evals/run_evals.py --suite full
+```
+
+Available suites are `smoke`, `full`, `trigger`, `behavior`, and `independent`. The default
+live model and judge model are `gpt-5.6-luna`; override them with `EVAL_MODEL` and
+`EVAL_JUDGE_MODEL` when needed.
+
+GitHub Actions runs deterministic validation on every pull request and push to `main`. When the
+repository secret `OPENAI_API_KEY` is configured, pull requests also run the live smoke suite.
+Manual and weekly scheduled runs can execute the full suite and upload the machine-readable and
+Markdown reports as workflow artifacts.
 
 The package should also pass the platform skill validator before release.
 
 ## Release status
 
-v1.0.3, release candidate. Keeps the v1.0.2 discovery and event-semantics safeguards and adds
-a shorter decision-focused default final response, explicit PDF/report and executive-email delivery
-modes, truthful artifact/send behavior, and regression tests that ensure format changes never remove
-material assumptions, warnings, blockers, or validation gaps. The existing healthcare safety, uncertainty, and
-human-governance boundaries remain unchanged. Example outputs are demonstrations, not proof that a
-live workflow, system, device, or organization is safe, compliant, or implementation-ready.
-Structural checks and limited AI forward tests do not substitute for organizational validation
-before operational use.
+v1.0.4, automated-evaluation release candidate. It keeps the v1.0.3 discovery, event-semantics,
+decision-focused output, PDF/report, and executive-email safeguards while adding a machine-readable
+evaluation registry, automated baseline-versus-skill scoring, trigger classification, critical-failure
+release gates, GitHub Actions CI, and seven independent regression scenarios spanning medication and
+non-medication clinical workflows. Automated evaluation is regression evidence, not clinical
+validation, compliance certification, or organizational approval.
 
 ## License
 

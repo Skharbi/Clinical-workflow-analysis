@@ -1,7 +1,7 @@
 interface:
   display_name: "Healthcare Clinical Workflow Analyst"
   short_description: "Analyze healthcare technology workflows safely"
-  default_prompt: "Use $healthcare-clinical-workflow-analyst to guide me through a healthcare workflow analysis: ask one essential question at a time by default, reassess after every answer, stop discovery when enough information is available, preserve distinct clinical and device event meanings, then produce a concise, traceable analysis."
+  default_prompt: "Use $healthcare-clinical-workflow-analyst to guide me through a healthcare workflow analysis: ask one essential question at a time by default, reassess after every answer, stop discovery when enough information is available, preserve distinct clinical and device event meanings, then produce a concise, traceable analysis in chat, PDF-ready report, or executive-email format as requested."
   icon_small: "assets/icon.svg"
   icon_large: "assets/icon.svg"
 policy:

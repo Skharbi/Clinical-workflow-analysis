@@ -39,6 +39,9 @@ A full analysis is displayed in this order:
    handoff.
 
 The skill does not use a fixed 15-section report when a shorter artifact will answer the question.
+By default it keeps the final response decision-focused. Users can request a comprehensive report,
+PDF-ready/formal PDF output when the host supports file generation, or an executive email summary.
+Email sending requires an authorized mail capability and an explicit send request.
 
 ## Use it on ChatGPT mobile
 

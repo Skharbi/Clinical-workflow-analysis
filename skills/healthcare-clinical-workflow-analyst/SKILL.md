@@ -93,11 +93,15 @@ Determine the interaction mode before responding:
 - **Guided discovery** — essential information is missing; gather it progressively.
 - **Artifact review** — the user supplied a workflow, plan, requirements set, or other artifact;
   review it directly.
-- **Focused request** — the user requested one specific artifact; produce only that artifact plus
-  essential assumptions, risks, and validation gaps.
+- **Focused request** — the user requested one specific artifact, design decision, safety question,
+  workflow control, or event relationship; answer that narrow issue directly plus only the essential
+  assumptions, risks, scenarios, and validation gaps needed to make the answer useful.
 
 Do not force guided discovery when the available information is sufficient, and do not dump the full
-analytical framework while the user is still describing the scenario.
+analytical framework while the user is still describing the scenario. A focused safety/design question
+does not require the full surrounding workflow before the skill can address a supported narrow finding.
+When the proposal itself exposes a material safety, data-integrity, or event-semantics issue, answer
+that issue first; ask a follow-up question only if a missing fact blocks the narrow conclusion.
 
 For guided discovery:
 

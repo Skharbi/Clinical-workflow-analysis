@@ -513,6 +513,18 @@ Add a **Detailed Analysis** section only when:
 - one specific detail is necessary to explain a material safety issue or blocker that cannot be
   responsibly summarized in the four primary sections.
 
+A request for analysis **before design approval, go-live approval, readiness review, or another
+formal decision gate** is different from a routine final summary. For those decision-gate requests,
+include the minimum decision-critical detail needed to support that gate even if the user did not say
+"full report." Keep it compact, but cover every material domain relevant to the decision. Depending on
+the case, that may require:
+- a concise AS-IS → TO-BE flow showing order/profile/access/replenishment or equivalent core steps;
+- the key access/override, inventory, controlled-substance, interface/data, and downtime dependencies;
+- a small set of proposed traceable requirements; and
+- observable validation/acceptance needs.
+Do not omit these merely to preserve brevity when they are necessary to make a design/readiness
+decision responsibly.
+
 When detail is necessary, include only that detail; do not automatically expand every analytical
 domain. Do not repeat the same fact across the Decision Brief, findings, risks, requirements, and
 open decisions unless repetition is necessary for traceability.

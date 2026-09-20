@@ -299,7 +299,8 @@
       "refs": [
         "references/workflow-analysis.md",
         "references/evidence-and-uncertainty.md"
-      ]
+      ],
+      "context": "The OR anesthesia-station discovery is complete. Current state: anesthesia staff collect medications from a ward-stock medication room before each case, administer in the OR, document on paper that is later scanned to the EHR, return unused regular medications, and return controlled medications to a safe. Controlled-medication removal/preparation/discard currently requires witness/signature. An anesthesia technician submits paper requisitions twice weekly using fixed par levels and urgent requisitions for stockouts. Target state: one anesthesia station per OR, EHR patient/case context sent to the station, authenticated anesthesia staff remove medications against the patient, unused medications are returned correctly, controlled transactions use the approved witness process, inventory updates electronically, pharmacy technicians replenish daily from par-level reports, controlled-drug replenishment is handled separately, discrepancy reporting is produced, and downtime transactions are reconciled after recovery. Important semantic constraint: station removal must not automatically be treated as medication administration unless separately validated and approved."
     },
     {
       "id": "EV-12",
@@ -320,7 +321,8 @@
         "references/medication-technology.md",
         "references/testing-and-validation.md"
       ],
-      "smoke": true
+      "smoke": true,
+      "context": "The OR anesthesia-station discovery is complete. Current state: anesthesia staff collect medications from a ward-stock medication room before each case, administer in the OR, document on paper that is later scanned to the EHR, return unused regular medications, and return controlled medications to a safe. Controlled-medication removal/preparation/discard currently requires witness/signature. An anesthesia technician submits paper requisitions twice weekly using fixed par levels and urgent requisitions for stockouts. Target state: one anesthesia station per OR, EHR patient/case context sent to the station, authenticated anesthesia staff remove medications against the patient, unused medications are returned correctly, controlled transactions use the approved witness process, inventory updates electronically, pharmacy technicians replenish daily from par-level reports, controlled-drug replenishment is handled separately, discrepancy reporting is produced, and downtime transactions are reconciled after recovery. Important semantic constraint: station removal must not automatically be treated as medication administration unless separately validated and approved."
     },
     {
       "id": "EV-13",
@@ -405,7 +407,8 @@
         "references/workflow-analysis.md",
         "references/medication-technology.md"
       ],
-      "smoke": true
+      "smoke": true,
+      "context": "ED ADC replacement discovery is complete. Current state: six legacy ED cabinets; routine medications mostly require pharmacy-verified orders; selected urgent medications may be accessed by approved override; nurses remove medication against the patient and later use BCMA for patient/medication verification and administration documentation; ADC removal is not the administration record. Controlled medications are included, waste follows the current separate-authentication process, pharmacy technicians replenish twice daily, and discrepancies are investigated manually. Current issues include delayed patient-profile updates, inventory discrepancies, and manual reconciliation. Downtime allows medication access using approved paper/manual procedures followed by reconciliation. Target state: six replacement ADCs with EHR patient/order context, preserved pharmacy verification for routine access, approved urgent overrides, electronic inventory/return/waste tracking, replenishment reporting, and transaction synchronization/reconciliation after downtime. Interface technology and exact vendor offline behavior remain unverified. No approved numeric targets exist yet."
     },
     {
       "id": "EV-18",

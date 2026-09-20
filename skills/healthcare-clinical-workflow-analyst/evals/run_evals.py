@@ -31,6 +31,7 @@ ROOT = HERE.parent
 CASES_PATH = HERE / "cases.json"
 SKILL_PATH = ROOT / "SKILL.md"
 RESULTS_DEFAULT = ROOT / "eval-results"
+ACTIVE_PROVIDER = "openai"
 
 DIMENSIONS = {
     "problem_framing": 10,
@@ -237,21 +238,33 @@ def call_json_text(client, model: str, instructions: str, prompt: str, max_token
     last_text = ""
     last_error: Exception | None = None
     for attempt in range(3):
-        response = client.responses.create(
-            model=model,
-            instructions=instructions,
-            input=prompt,
-            max_output_tokens=max_tokens,
-            **response_reasoning_kwargs(model),
-            text={
-                "format": {
-                    "type": "json_schema",
-                    "name": "eval_judgment",
-                    "schema": JUDGE_SCHEMA,
-                }
-            },
-        )
-        last_text = response.output_text.strip()
+        if ACTIVE_PROVIDER == "deepseek":
+            response = client.chat.completions.create(
+                model=model,
+                messages=[
+                    {"role": "system", "content": instructions + "\nReturn valid JSON only."},
+                    {"role": "user", "content": prompt},
+                ],
+                max_tokens=max_tokens,
+                response_format={"type": "json_object"},
+            )
+            last_text = (response.choices[0].message.content or "").strip()
+        else:
+            response = client.responses.create(
+                model=model,
+                instructions=instructions,
+                input=prompt,
+                max_output_tokens=max_tokens,
+                text={
+                    "format": {
+                        "type": "json_schema",
+                        "name": "eval_judgment",
+                        "schema": JUDGE_SCHEMA,
+                    }
+                },
+            )
+            last_text = response.output_text.strip()
+
         if not last_text:
             last_error = ValueError("judge returned empty output")
             continue
@@ -427,6 +440,8 @@ def main() -> int:
         return 0
 
     provider = resolve_provider(args.provider)
+    global ACTIVE_PROVIDER
+    ACTIVE_PROVIDER = provider
     model = args.model or default_model(provider)
     judge_model = args.judge_model or model
     client = make_client(provider)

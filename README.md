@@ -123,12 +123,13 @@ The package should also pass the platform skill validator before release.
 
 ## Release status
 
-v1.0.6, proportional-output release candidate. It keeps the v1.0.5 multi-provider regression
-pipeline and tightens two behaviors identified by the first full DeepSeek run: focused requests now
-treat explicit artifact/count/format exclusions as hard output boundaries, and a request for a final
-analysis no longer expands into a comprehensive report by default. EV-05 and EV-17 are promoted into
-the smoke suite to prevent regression. Automated evaluation is regression evidence, not clinical
-validation, compliance certification, or organizational approval.
+v1.0.7, evidence-first analysis release candidate. It keeps the v1.0.6 proportional-output
+behavior and closes three issues exposed by the next full DeepSeek run: a completed/final scenario no
+longer authorizes reconstruction of missing facts from a "typical" workflow; interface investigations
+can proceed provisionally when standards, direction, identifiers, or source-of-truth are still unknown;
+and contextual healthcare policy summaries are classified consistently by the eval runner. EV-12,
+IS-05, and AM-03 are now part of smoke coverage. Automated evaluation is regression evidence, not
+clinical validation, compliance certification, or organizational approval.
 
 ## License
 

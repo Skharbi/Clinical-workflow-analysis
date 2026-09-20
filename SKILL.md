@@ -360,6 +360,11 @@ Separate solution verification (built as specified), operational validation (wor
 workflow), user acceptance, and benefits evaluation. Passing technical tests alone does not prove
 workflow readiness or benefit realization.
 
+For barcode-scanning, override, bypass, or safety-control investigations, a focused remediation
+analysis should include validation of the proposed fix—not just evidence collection. Include at least
+one **negative/exception scenario** and one **failure/downtime scenario** when those modes could
+recreate the workaround or bypass. Keep these concise and tied to the suspected control pathway.
+
 ### 11. Close gaps
 
 Prioritize unresolved items:

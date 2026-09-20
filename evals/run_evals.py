@@ -4,9 +4,12 @@
 Deterministic registry validation works without network access:
     python evals/run_evals.py --validate-only
 
-Live evaluation requires OPENAI_API_KEY:
-    python evals/run_evals.py --suite smoke
-    python evals/run_evals.py --suite full
+Live evaluation supports DeepSeek or OpenAI:
+    DEEPSEEK_API_KEY=... python evals/run_evals.py --suite smoke
+    OPENAI_API_KEY=... python evals/run_evals.py --suite full
+
+Provider selection defaults to auto: DeepSeek is preferred when DEEPSEEK_API_KEY is present,
+otherwise OpenAI is used when OPENAI_API_KEY is present.
 
 The live runner compares a generic baseline answer with a skill-assisted answer,
 then uses a separate judge call to score both against the repository rubric.
@@ -136,14 +139,35 @@ def extract_json(text: str) -> dict[str, Any]:
             raise
         return json.loads(match.group(0))
 
-def make_client():
+def resolve_provider(requested: str) -> str:
+    if requested == "deepseek":
+        if not os.environ.get("DEEPSEEK_API_KEY"):
+            fail("DEEPSEEK_API_KEY is required when provider=deepseek")
+        return "deepseek"
+    if requested == "openai":
+        if not os.environ.get("OPENAI_API_KEY"):
+            fail("OPENAI_API_KEY is required when provider=openai")
+        return "openai"
+    if os.environ.get("DEEPSEEK_API_KEY"):
+        return "deepseek"
+    if os.environ.get("OPENAI_API_KEY"):
+        return "openai"
+    fail("No live-eval API key configured. Set DEEPSEEK_API_KEY or OPENAI_API_KEY.")
+
+def make_client(provider: str):
     try:
         from openai import OpenAI
-    except ImportError as exc:
+    except ImportError:
         fail("openai package is required for live evals: pip install openai")
-    if not os.environ.get("OPENAI_API_KEY"):
-        fail("OPENAI_API_KEY is required for live evals")
-    return OpenAI()
+    if provider == "deepseek":
+        return OpenAI(
+            api_key=os.environ["DEEPSEEK_API_KEY"],
+            base_url="https://api.deepseek.com",
+        )
+    return OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+
+def default_model(provider: str) -> str:
+    return "deepseek-flash" if provider == "deepseek" else "gpt-5.6-luna"
 
 def call_text(client, model: str, instructions: str, prompt: str, max_tokens: int) -> str:
     response = client.responses.create(
@@ -250,6 +274,7 @@ def build_markdown(result: dict[str, Any]) -> str:
         "",
         f"- Generated: {result['generated_at']}",
         f"- Suite: {result['suite']}",
+        f"- Provider: {result['provider']}",
         f"- Model: {result['model']}",
         f"- Judge model: {result['judge_model']}",
         f"- Trigger accuracy: {result['summary']['trigger_passed']}/{result['summary']['trigger_total']}",
@@ -293,8 +318,9 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--validate-only", action="store_true")
     parser.add_argument("--suite", choices=["smoke", "full", "trigger", "behavior", "independent"], default="smoke")
-    parser.add_argument("--model", default=os.environ.get("EVAL_MODEL", "gpt-5.6-luna"))
-    parser.add_argument("--judge-model", default=os.environ.get("EVAL_JUDGE_MODEL", "gpt-5.6-luna"))
+    parser.add_argument("--provider", choices=["auto", "deepseek", "openai"], default=os.environ.get("EVAL_PROVIDER", "auto"))
+    parser.add_argument("--model", default=os.environ.get("EVAL_MODEL", ""))
+    parser.add_argument("--judge-model", default=os.environ.get("EVAL_JUDGE_MODEL", ""))
     parser.add_argument("--output-dir", default=str(RESULTS_DEFAULT))
     args = parser.parse_args()
 
@@ -310,18 +336,22 @@ def main() -> int:
     if args.validate_only:
         return 0
 
-    client = make_client()
+    provider = resolve_provider(args.provider)
+    model = args.model or default_model(provider)
+    judge_model = args.judge_model or model
+    client = make_client(provider)
+    print(f"Live provider: {provider}; model: {model}; judge: {judge_model}")
     triggers, behaviors = select_cases(registry, args.suite)
 
     trigger_results = []
     for case in triggers:
         print(f"[trigger] {case['id']}")
-        trigger_results.append(run_trigger_case(client, args.model, case))
+        trigger_results.append(run_trigger_case(client, model, case))
 
     behavior_results = []
     for case in behaviors:
         print(f"[behavior] {case['id']}")
-        behavior_results.append(run_behavior_case(client, args.model, args.judge_model, case))
+        behavior_results.append(run_behavior_case(client, model, judge_model, case))
 
     summary = {
         "trigger_total": len(trigger_results),
@@ -335,8 +365,9 @@ def main() -> int:
     result = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "suite": args.suite,
-        "model": args.model,
-        "judge_model": args.judge_model,
+        "provider": provider,
+        "model": model,
+        "judge_model": judge_model,
         "summary": summary,
         "triggers": trigger_results,
         "behaviors": behavior_results,

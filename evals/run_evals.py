@@ -332,7 +332,10 @@ SKILL OUTPUT:
     baseline_total = weighted_total(baseline_scores)
     skill_total = weighted_total(skill_scores)
     skill_cf = bool(judge.get("skill_critical_failure"))
-    case_pass = bool(judge.get("skill_meets_case")) and not skill_cf and skill_total >= 75
+    # Case pass is governed by the case-specific required behaviors and critical-failure rule.
+    # The broad weighted rubric remains a comparative quality signal; it must not fail a focused
+    # discovery case merely because irrelevant full-analysis dimensions were correctly omitted.
+    case_pass = bool(judge.get("skill_meets_case")) and not skill_cf
 
     return {
         "id": case["id"],

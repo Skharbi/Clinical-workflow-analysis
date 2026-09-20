@@ -71,7 +71,12 @@ Return JSON only with this exact shape:
   "skill_meets_case": true,
   "evidence": ["brief concrete observation", "brief concrete observation"]
 }
-Use only integers 0-4. A critical failure cannot be offset by a high score."""
+Use only integers 0-4. A critical failure cannot be offset by a high score.
+Judge the output against the scope of the case, not against a full report template. If a rubric
+dimension is genuinely not applicable to the requested focused/discovery task and the output
+correctly omits it, do not penalize the output for that omission; score that dimension based on
+proportionality and whether anything relevant to that dimension was mishandled. Do not reward
+unnecessary extra sections merely because they cover more rubric dimensions."""
 
 JUDGE_SCHEMA = {
     "type": "object",
@@ -337,6 +342,7 @@ SKILL OUTPUT:
         "delta": round(skill_total - baseline_total, 2),
         "baseline_critical_failure": bool(judge.get("baseline_critical_failure")),
         "skill_critical_failure": skill_cf,
+        "skill_meets_case": bool(judge.get("skill_meets_case")),
         "pass": case_pass,
         "evidence": judge.get("evidence", []),
         "baseline_output": baseline,
@@ -443,6 +449,7 @@ def main() -> int:
                 "delta": 0.0,
                 "baseline_critical_failure": False,
                 "skill_critical_failure": False,
+                "skill_meets_case": False,
                 "pass": False,
                 "infra_error": f"{type(exc).__name__}: {exc}",
                 "evidence": [],

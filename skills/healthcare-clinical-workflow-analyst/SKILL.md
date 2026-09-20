@@ -446,8 +446,15 @@ You may identify hazards, workflow weaknesses, missing controls, or areas requir
 Lead with the answer, not the analytical method. Match the output to the user's request and include
 only sections supported by the scenario and needed for the decision.
 
-For a focused request, return the requested artifact plus only the assumptions, risks, and validation
-gaps needed to make it usable.
+For a focused request, treat the user's requested artifact, count, format, and explicit exclusions as
+hard output boundaries unless following them would hide a material safety warning. If the user asks
+for exactly N items, return exactly N items. If the user says not to provide a full workflow report,
+do not append workflow maps, risk registers, validation scenarios, implementation plans, or other
+standalone sections they did not request.
+
+Add at most one compact **Assumptions / validation note** after the requested artifact, and only when
+a missing fact materially changes how the artifact should be interpreted or tested. Keep safety-critical
+caveats adjacent to the affected item instead of expanding into a broader report.
 
 For a full workflow analysis, separate **analysis depth** from **delivery format**.
 

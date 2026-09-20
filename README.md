@@ -28,19 +28,22 @@ During discovery, the skill summarizes what it understands, shows what is comple
 one material question at a time by default, and reassesses after every answer. It stops discovery as
 soon as a responsible first-pass analysis is possible instead of trying to eliminate every unknown.
 
-A full analysis is displayed in this order:
+The default final analysis is displayed in this order:
 
 1. **Decision Brief** — the problem, bottom line, expected change, primary concern, and next action.
 2. **Workflow at a Glance** — current state versus target state and the main impact.
-3. **Priority Findings** — the most important findings, evidence status, and recommended action.
-4. **Detailed Analysis** — only the workflow, requirements, risks, interfaces, downtime, and tests
-   relevant to the scenario.
-5. **Open Decisions and Next Action** — blocking, important, and optimization items with a clear
+3. **Priority Findings** — only the findings that materially affect the decision.
+4. **Open Decisions and Next Action** — blocking, important, and optimization items with a clear
    handoff.
 
-The skill does not use a fixed 15-section report when a shorter artifact will answer the question.
-By default it keeps the final response decision-focused. Users can request a comprehensive report,
-PDF-ready/formal PDF output when the host supports file generation, or an executive email summary.
+"Final analysis" does not automatically mean "full report." Detailed requirements, risks, interfaces,
+downtime, testing, stakeholder inventories, and implementation sections are added only when the user
+asks for them or a specific detail is needed to explain a material blocker or safety issue.
+
+Focused requests also stay focused: if the user asks for exactly five requirements, the skill returns
+five requirements rather than expanding into a workflow report. Users can still request a
+comprehensive report, PDF-ready/formal PDF output when the host supports file generation, or an
+executive email summary.
 Email sending requires an authorized mail capability and an explicit send request.
 
 ## Use it on ChatGPT mobile
@@ -120,11 +123,12 @@ The package should also pass the platform skill validator before release.
 
 ## Release status
 
-v1.0.5, multi-provider evaluation release candidate. It keeps the v1.0.4 automated regression
-pipeline and adds DeepSeek as the preferred CI evaluation provider with OpenAI fallback. The runner
-uses the same case registry, scoring rubric, critical-failure gate, and report format across providers,
-which reduces dependence on a single model vendor. Automated evaluation is regression evidence, not
-clinical validation, compliance certification, or organizational approval.
+v1.0.6, proportional-output release candidate. It keeps the v1.0.5 multi-provider regression
+pipeline and tightens two behaviors identified by the first full DeepSeek run: focused requests now
+treat explicit artifact/count/format exclusions as hard output boundaries, and a request for a final
+analysis no longer expands into a comprehensive report by default. EV-05 and EV-17 are promoted into
+the smoke suite to prevent regression. Automated evaluation is regression evidence, not clinical
+validation, compliance certification, or organizational approval.
 
 ## License
 

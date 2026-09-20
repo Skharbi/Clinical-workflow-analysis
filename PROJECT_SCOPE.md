@@ -1,7 +1,7 @@
 # Healthcare Clinical Workflow Analyst — Project Scope
 
 **Version:** 1.1  
-**Project status:** v1.0.5 / multi-provider evaluation release candidate
+**Project status:** v1.0.6 / proportional-output release candidate
 **Project type:** Open-source Agent Skill  
 **Domain:** Healthcare informatics, clinical workflow, medication-use technology, and health IT implementation  
 **Last reviewed:** 2026-09-16

@@ -73,6 +73,47 @@ Return JSON only with this exact shape:
 }
 Use only integers 0-4. A critical failure cannot be offset by a high score."""
 
+JUDGE_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "required": [
+        "baseline_scores",
+        "skill_scores",
+        "baseline_critical_failure",
+        "skill_critical_failure",
+        "skill_meets_case",
+        "evidence",
+    ],
+    "properties": {
+        "baseline_scores": {
+            "type": "object",
+            "additionalProperties": False,
+            "required": list(DIMENSIONS.keys()),
+            "properties": {
+                key: {"type": "integer", "minimum": 0, "maximum": 4}
+                for key in DIMENSIONS
+            },
+        },
+        "skill_scores": {
+            "type": "object",
+            "additionalProperties": False,
+            "required": list(DIMENSIONS.keys()),
+            "properties": {
+                key: {"type": "integer", "minimum": 0, "maximum": 4}
+                for key in DIMENSIONS
+            },
+        },
+        "baseline_critical_failure": {"type": "boolean"},
+        "skill_critical_failure": {"type": "boolean"},
+        "skill_meets_case": {"type": "boolean"},
+        "evidence": {
+            "type": "array",
+            "maxItems": 4,
+            "items": {"type": "string"},
+        },
+    },
+}
+
 def fail(message: str) -> None:
     raise SystemExit(f"FAIL: {message}")
 
@@ -188,7 +229,13 @@ def call_json_text(client, model: str, instructions: str, prompt: str, max_token
             instructions=instructions,
             input=prompt,
             max_output_tokens=max_tokens,
-            text={"format": {"type": "json_object"}},
+            text={
+                "format": {
+                    "type": "json_schema",
+                    "name": "eval_judgment",
+                    "schema": JUDGE_SCHEMA,
+                }
+            },
         )
         last_text = response.output_text.strip()
         if not last_text:
@@ -303,6 +350,7 @@ def build_markdown(result: dict[str, Any]) -> str:
         f"- Trigger accuracy: {result['summary']['trigger_passed']}/{result['summary']['trigger_total']}",
         f"- Behavior cases passed: {result['summary']['behavior_passed']}/{result['summary']['behavior_total']}",
         f"- Skill critical failures: {result['summary']['skill_critical_failures']}",
+        f"- Evaluation infrastructure errors: {result['summary']['infra_errors']}",
         f"- Skill better than baseline: {result['summary']['skill_better_than_baseline']}/{result['summary']['behavior_total']}",
         "",
         "## Trigger Cases",
@@ -324,7 +372,8 @@ def build_markdown(result: dict[str, Any]) -> str:
         lines.append(
             f"| {item['id']} | {item['suite']} | {item['baseline_score']:.2f} | "
             f"{item['skill_score']:.2f} | {item['delta']:+.2f} | "
-            f"{'YES' if item['skill_critical_failure'] else 'No'} | {'PASS' if item['pass'] else 'FAIL'} |"
+            f"{'YES' if item['skill_critical_failure'] else 'No'} | "
+            f"{'INFRA' if item.get('infra_error') else ('PASS' if item['pass'] else 'FAIL')} |"
         )
 
     failed = [x for x in result["behaviors"] if not x["pass"]] + [x for x in result["triggers"] if not x["pass"]]
@@ -374,7 +423,24 @@ def main() -> int:
     behavior_results = []
     for case in behaviors:
         print(f"[behavior] {case['id']}")
-        behavior_results.append(run_behavior_case(client, model, judge_model, case))
+        try:
+            behavior_results.append(run_behavior_case(client, model, judge_model, case))
+        except Exception as exc:
+            behavior_results.append({
+                "id": case["id"],
+                "suite": case["suite"],
+                "baseline_score": 0.0,
+                "skill_score": 0.0,
+                "delta": 0.0,
+                "baseline_critical_failure": False,
+                "skill_critical_failure": False,
+                "pass": False,
+                "infra_error": f"{type(exc).__name__}: {exc}",
+                "evidence": [],
+                "baseline_output": "",
+                "skill_output": "",
+                "scores": {"baseline": {}, "skill": {}},
+            })
 
     summary = {
         "trigger_total": len(trigger_results),
@@ -383,6 +449,7 @@ def main() -> int:
         "behavior_passed": sum(1 for x in behavior_results if x["pass"]),
         "skill_critical_failures": sum(1 for x in behavior_results if x["skill_critical_failure"]),
         "skill_better_than_baseline": sum(1 for x in behavior_results if x["skill_score"] > x["baseline_score"]),
+        "infra_errors": sum(1 for x in behavior_results if x.get("infra_error")),
     }
 
     result = {
@@ -406,6 +473,7 @@ def main() -> int:
         summary["trigger_passed"] == summary["trigger_total"]
         and summary["behavior_passed"] == summary["behavior_total"]
         and summary["skill_critical_failures"] == 0
+        and summary["infra_errors"] == 0
         and (
             summary["behavior_total"] == 0
             or summary["skill_better_than_baseline"] > summary["behavior_total"] / 2

@@ -29,7 +29,11 @@ Apply these cross-cutting checks within the dimensions above when relevant:
 - the underlying need and expected value are separated from a preferred solution;
 - stakeholder authority and engagement are explicit rather than reduced to a name list;
 - requirement status, change rationale, impact, approval, and traceability are preserved;
-- verification, workflow validation, acceptance, readiness, and benefits evaluation are not conflated.
+- verification, workflow validation, acceptance, readiness, and benefits evaluation are not conflated;
+- guided discovery asks only material questions, reassesses after each answer, and stops once a responsible first-pass analysis is possible;
+- distinct workflow events retain their meaning unless evidence supports equivalence, especially dispensing/removal versus medication administration;
+- blockers identify the decision or evidence needed and the responsible owner when known;
+- success measures distinguish baseline, target, method, and observation period without inventing numeric targets.
 
 ## Calculation
 

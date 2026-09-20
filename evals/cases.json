@@ -105,7 +105,8 @@
       "id": "AM-03",
       "suite": "trigger",
       "prompt": "Summarize this medication policy.",
-      "expected": "CONTEXTUAL"
+      "expected": "CONTEXTUAL",
+      "smoke": true
     }
   ],
   "behavior_cases": [
@@ -318,7 +319,8 @@
         "references/workflow-analysis.md",
         "references/medication-technology.md",
         "references/testing-and-validation.md"
-      ]
+      ],
+      "smoke": true
     },
     {
       "id": "EV-13",
@@ -524,7 +526,8 @@
       "refs": [
         "references/interoperability-and-data.md",
         "references/evidence-and-uncertainty.md"
-      ]
+      ],
+      "smoke": true
     },
     {
       "id": "IS-06",

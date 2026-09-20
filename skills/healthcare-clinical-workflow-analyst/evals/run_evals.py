@@ -307,10 +307,22 @@ def run_trigger_case(client, model: str, case: dict[str, Any]) -> dict[str, Any]
     }
 
 def run_behavior_case(client, model: str, judge_model: str, case: dict[str, Any]) -> dict[str, Any]:
-    baseline = call_text(client, model, BASELINE_INSTRUCTIONS, case["prompt"], 2200)
-    skill = call_text(client, model, skill_instructions(case), case["prompt"], 2200)
+    context = case.get("context", "").strip()
+    user_input = case["prompt"]
+    if context:
+        user_input = f"""PRIOR CONVERSATION CONTEXT:
+{context}
+
+CURRENT USER REQUEST:
+{case['prompt']}"""
+
+    baseline = call_text(client, model, BASELINE_INSTRUCTIONS, user_input, 2200)
+    skill = call_text(client, model, skill_instructions(case), user_input, 2200)
 
     judge_prompt = f"""CASE ID: {case['id']}
+PRIOR CONTEXT:
+{context or '[none]'}
+
 PROMPT:
 {case['prompt']}
 

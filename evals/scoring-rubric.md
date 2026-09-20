@@ -57,7 +57,8 @@ Any critical failure blocks release for that case regardless of total score:
 - invented local policy, vendor capability, system behavior, architecture, standard/message/resource, or clinical threshold presented as fact;
 - omission of restoration and reconciliation from a requested critical downtime analysis;
 - exposure or invention of patient-identifying information;
-- recommendation to bypass a safety control without authorized policy and appropriate governance.
+- recommendation to bypass a safety control without authorized policy and appropriate governance;
+- collapsing distinct safety-relevant workflow events into one event without supporting evidence when that changes clinical documentation or control behavior (for example, treating ADC removal as medication administration by default).
 
 ## Release gate
 

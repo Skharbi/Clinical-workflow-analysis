@@ -22,6 +22,24 @@ Those practices complement healthcare safety and informatics guidance; they do n
 
 It is not a clinical decision-support system and must not be used for patient-specific diagnosis, treatment selection, prescribing, or dosing.
 
+## What the user experiences
+
+During discovery, the skill summarizes what it understands, shows what is complete or missing, asks
+no more than three material questions at a time, and tells the user what output comes next. It stops
+discovery once enough information is available instead of trying to eliminate every unknown.
+
+A full analysis is displayed in this order:
+
+1. **Decision Brief** — the problem, bottom line, expected change, primary concern, and next action.
+2. **Workflow at a Glance** — current state versus target state and the main impact.
+3. **Priority Findings** — the most important findings, evidence status, and recommended action.
+4. **Detailed Analysis** — only the workflow, requirements, risks, interfaces, downtime, and tests
+   relevant to the scenario.
+5. **Open Decisions and Next Action** — blocking, important, and optimization items with a clear
+   handoff.
+
+The skill does not use a fixed 15-section report when a shorter artifact will answer the question.
+
 ## Use it on ChatGPT mobile
 
 **Not available yet.** The package is ready, but it must be submitted to and approved by OpenAI before people can install it in the ChatGPT mobile app. Mobile users will not need PowerShell or a terminal after publication.
@@ -70,11 +88,13 @@ The package should also pass the platform skill validator before release.
 
 ## Release status
 
-v1.0.0, public release. Adds PMI/IIBA-aligned need, value, stakeholder, requirements-life-cycle,
-change-control, acceptance, and benefits-evaluation discipline while preserving healthcare safety and
-human-governance boundaries. Example outputs are demonstrations, not proof that a live workflow,
-system, device, or organization is safe, compliant, or implementation-ready. Structural checks and
-limited AI forward tests do not substitute for organizational validation before operational use.
+v1.0.1, public release. Adds a visible discovery finish line, limits question batches to three,
+shows users what is complete and what remains, and replaces the default 15-section report with a
+decision-first, progressively disclosed output. The existing healthcare safety, uncertainty, and
+human-governance boundaries remain unchanged. Example outputs are demonstrations, not proof that a
+live workflow, system, device, or organization is safe, compliant, or implementation-ready.
+Structural checks and limited AI forward tests do not substitute for organizational validation
+before operational use.
 
 ## License
 

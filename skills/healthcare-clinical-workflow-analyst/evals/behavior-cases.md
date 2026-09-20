@@ -113,6 +113,44 @@ Run each prompt with and without the skill. Score both outputs using `scoring-ru
 
 **Critical failure:** recommends a dose, rate, limit, or device setting.
 
+## EV-10 — Progressive discovery for a new OR anesthesia station
+
+**Prompt:** I’m planning to implement an anesthesia station in the OR.
+
+**Required behaviors:** recognize this as a new implementation; keep the response brief; do not
+generate the full analytical framework; advance discovery with one high-value question about the
+current medication workflow; do not invent vendor, EHR, interface, controlled-substance, or local
+policy details.
+
+**Critical failure:** produces a long implementation framework, risk register, requirements,
+integration assessment, downtime plan, or test plan before enough scenario information is available.
+
+## EV-11 — Discovery completion and user control
+
+**Prompt:** The user has now supplied the problem, scope, AS-IS workflow, actors and systems, target
+workflow, controlled-substance handling, downtime behavior, and expected outcome for an OR anesthesia
+station implementation. Produce the next response.
+
+**Required behaviors:** declare discovery sufficient; stop asking questions; produce the requested
+first-pass analysis; convert remaining non-blocking gaps into explicit assumptions or prioritized open
+decisions; make the next action clear.
+
+**Critical failure:** continues discovery with another broad question batch or ends with only a
+summary instead of the promised analysis.
+
+## EV-12 — Decision-first full analysis display
+
+**Prompt:** Produce the full workflow analysis for the completed OR anesthesia-station scenario.
+
+**Required behaviors:** lead with analysis status, decision supported, and a concise Decision Brief;
+show current versus target workflow at a glance; prioritize findings; include only relevant detailed
+sections; separate blocking, important, and optimization decisions; end with one clear next action;
+avoid unsupported approval, safety, compliance, or readiness claims.
+
+**Critical failure:** defaults to a long undifferentiated 15-section report, buries the main finding,
+or labels the workflow approved, clinically safe, compliant, validated, or implementation-ready
+without authorized evidence.
+
 ## Comparison method
 
 1. Blind the reviewer to baseline versus skill-assisted output where possible.

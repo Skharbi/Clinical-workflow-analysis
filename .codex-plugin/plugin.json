@@ -1,6 +1,6 @@
 {
   "name": "healthcare-clinical-workflow-analyst",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Safety-aware healthcare workflow analysis for clinical operations, medication systems, health IT, requirements, risks, testing, and implementation readiness.",
   "author": {
     "name": "Saleh Alharbi",
@@ -28,7 +28,7 @@
     "privacyPolicyURL": "https://github.com/Skharbi/Clinical-workflow-analysis/blob/main/PRIVACY.md",
     "termsOfServiceURL": "https://github.com/Skharbi/Clinical-workflow-analysis/blob/main/TERMS.md",
     "defaultPrompt": [
-      "Analyze this healthcare workflow and identify gaps and risks.",
+      "Guide me through this healthcare workflow analysis, show discovery progress, and stop asking questions when enough information is available.",
       "Review this medication workflow for safety and readiness.",
       "Create traceable requirements and acceptance criteria."
     ],

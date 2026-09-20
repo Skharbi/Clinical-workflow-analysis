@@ -33,7 +33,10 @@ Apply these cross-cutting checks within the dimensions above when relevant:
 - guided discovery asks only material questions, reassesses after each answer, and stops once a responsible first-pass analysis is possible;
 - distinct workflow events retain their meaning unless evidence supports equivalence, especially dispensing/removal versus medication administration;
 - blockers identify the decision or evidence needed and the responsible owner when known;
-- success measures distinguish baseline, target, method, and observation period without inventing numeric targets.
+- success measures distinguish baseline, target, method, and observation period without inventing numeric targets;
+- the default final response is decision-focused and avoids duplicating detailed analysis unless the user requests or needs it;
+- PDF, email, chat, and document versions preserve the same analytical status, material assumptions, warnings, and open decisions;
+- file or email delivery is never claimed unless the host actually created or sent it through an authorized capability.
 
 ## Calculation
 

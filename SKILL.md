@@ -150,7 +150,16 @@ For guided discovery:
 
 Discovery is sufficient when the problem or decision, workflow boundary, main current-state sequence,
 major actors and systems, and intended outcome or requested deliverable are understood, and no
-unresolved blocker prevents a responsible analysis. When this gate is met, state:
+unresolved blocker prevents a responsible analysis.
+
+For a requested **first-pass analysis** or **analysis before product selection**, do not require every
+lifecycle step, role rule, metric, or exception to be known before proceeding. If the core problem,
+boundary, actors, and intended outcome are clear enough to model the workflow responsibly, produce a
+provisional AS-IS/TO-BE analysis using explicit assumptions and Unknown labels. Treat missing details
+as Blocking only when they truly prevent the next responsible decision; otherwise classify them as
+Important validation items or Optimization.
+
+When this gate is met, state:
 
 **Discovery complete — sufficient information is available for analysis.**
 

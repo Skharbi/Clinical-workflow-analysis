@@ -352,6 +352,16 @@ When systems or devices interact, identify where supported:
 Do not assume HL7 v2, FHIR, APIs, middleware, message types, resources, or architecture without
 evidence.
 
+For an **interface investigation before redesign**, unknown architecture is usually an analysis target,
+not a discovery blocker. When the interacting systems, observed inconsistency, triggering event, and
+investigation goal are known, produce a provisional interface analysis immediately. Model the
+conceptual path without choosing the source of truth: triggering clinical/operational event → source
+record/state change → outbound exchange → transport/interface processing → receiving-system matching
+and update → acknowledgement/error handling → retry/reprocessing → reconciliation/verification.
+Identify the evidence needed to determine authoritative source, identifiers, timing, mapping, ordering,
+duplicates, stale state, and ownership. Ask a targeted follow-up question after that first-pass
+analysis unless one specific unknown truly prevents the requested decision.
+
 ### 9. Analyze downtime and exceptions
 
 Request the existing downtime policy and relevant system/configuration evidence when reviewing a plan. Continue a provisional gap analysis while these are missing; do not assume their content or approval.

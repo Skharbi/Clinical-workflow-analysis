@@ -202,6 +202,8 @@ Distinguish a known stakeholder report from a verified cause: “staff report sc
 
 Treat new metric definitions, denominators, exclusions, thresholds, and counting rules as proposals requiring local agreement. Do not silently turn a suggested reporting formula into an approved organizational requirement.
 
+When success measures are missing, identify the **measurement domain** and the evidence needed (for example workflow time, discrepancy rate, override rate, scan compliance, availability, or user burden) without inventing a target. Distinguish baseline, target, measurement method, observation period, and decision owner.
+
 ### 3. Model the AS-IS workflow
 
 For relevant steps identify:

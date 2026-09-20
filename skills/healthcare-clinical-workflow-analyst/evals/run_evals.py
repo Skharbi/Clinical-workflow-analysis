@@ -178,6 +178,29 @@ def call_text(client, model: str, instructions: str, prompt: str, max_tokens: in
     )
     return response.output_text.strip()
 
+def call_json_text(client, model: str, instructions: str, prompt: str, max_tokens: int) -> str:
+    """Request JSON output and retry transient empty/non-JSON responses."""
+    last_text = ""
+    last_error: Exception | None = None
+    for attempt in range(3):
+        response = client.responses.create(
+            model=model,
+            instructions=instructions,
+            input=prompt,
+            max_output_tokens=max_tokens,
+            text={"format": {"type": "json_object"}},
+        )
+        last_text = response.output_text.strip()
+        if not last_text:
+            last_error = ValueError("judge returned empty output")
+            continue
+        try:
+            extract_json(last_text)
+            return last_text
+        except (json.JSONDecodeError, ValueError) as exc:
+            last_error = exc
+    raise ValueError(f"judge did not return valid JSON after 3 attempts: {last_error}; output={last_text[:500]!r}")
+
 def skill_instructions(case: dict[str, Any]) -> str:
     parts = [
         "Follow the Healthcare Clinical Workflow Analyst skill instructions below.",
@@ -241,7 +264,7 @@ SKILL OUTPUT:
 {skill}
 ---END SKILL---
 """
-    raw_judge = call_text(client, judge_model, JUDGE_INSTRUCTIONS, judge_prompt, 1400)
+    raw_judge = call_json_text(client, judge_model, JUDGE_INSTRUCTIONS, judge_prompt, 1800)
     judge = extract_json(raw_judge)
     baseline_scores = judge.get("baseline_scores", {})
     skill_scores = judge.get("skill_scores", {})

@@ -1,6 +1,6 @@
 {
   "name": "healthcare-clinical-workflow-analyst",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Safety-aware healthcare workflow analysis for clinical operations, medication systems, health IT, requirements, risks, testing, and implementation readiness.",
   "author": {
     "name": "Saleh Alharbi",

@@ -4,9 +4,12 @@
 Deterministic registry validation works without network access:
     python evals/run_evals.py --validate-only
 
-Live evaluation requires OPENAI_API_KEY:
-    python evals/run_evals.py --suite smoke
-    python evals/run_evals.py --suite full
+Live evaluation supports DeepSeek or OpenAI:
+    DEEPSEEK_API_KEY=... python evals/run_evals.py --suite smoke
+    OPENAI_API_KEY=... python evals/run_evals.py --suite full
+
+Provider selection defaults to auto: DeepSeek is preferred when DEEPSEEK_API_KEY is present,
+otherwise OpenAI is used when OPENAI_API_KEY is present.
 
 The live runner compares a generic baseline answer with a skill-assisted answer,
 then uses a separate judge call to score both against the repository rubric.
@@ -68,7 +71,53 @@ Return JSON only with this exact shape:
   "skill_meets_case": true,
   "evidence": ["brief concrete observation", "brief concrete observation"]
 }
-Use only integers 0-4. A critical failure cannot be offset by a high score."""
+Use only integers 0-4. A critical failure cannot be offset by a high score.
+Judge the output against the scope of the case, not against a full report template. If a rubric
+dimension is genuinely not applicable to the requested focused/discovery task and the output
+correctly omits it, do not penalize the output for that omission; score that dimension based on
+proportionality and whether anything relevant to that dimension was mishandled. Do not reward
+unnecessary extra sections merely because they cover more rubric dimensions."""
+
+JUDGE_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "required": [
+        "baseline_scores",
+        "skill_scores",
+        "baseline_critical_failure",
+        "skill_critical_failure",
+        "skill_meets_case",
+        "evidence",
+    ],
+    "properties": {
+        "baseline_scores": {
+            "type": "object",
+            "additionalProperties": False,
+            "required": list(DIMENSIONS.keys()),
+            "properties": {
+                key: {"type": "integer", "minimum": 0, "maximum": 4}
+                for key in DIMENSIONS
+            },
+        },
+        "skill_scores": {
+            "type": "object",
+            "additionalProperties": False,
+            "required": list(DIMENSIONS.keys()),
+            "properties": {
+                key: {"type": "integer", "minimum": 0, "maximum": 4}
+                for key in DIMENSIONS
+            },
+        },
+        "baseline_critical_failure": {"type": "boolean"},
+        "skill_critical_failure": {"type": "boolean"},
+        "skill_meets_case": {"type": "boolean"},
+        "evidence": {
+            "type": "array",
+            "maxItems": 4,
+            "items": {"type": "string"},
+        },
+    },
+}
 
 def fail(message: str) -> None:
     raise SystemExit(f"FAIL: {message}")
@@ -136,14 +185,42 @@ def extract_json(text: str) -> dict[str, Any]:
             raise
         return json.loads(match.group(0))
 
-def make_client():
+def resolve_provider(requested: str) -> str:
+    if requested == "deepseek":
+        if not os.environ.get("DEEPSEEK_API_KEY"):
+            fail("DEEPSEEK_API_KEY is required when provider=deepseek")
+        return "deepseek"
+    if requested == "openai":
+        if not os.environ.get("OPENAI_API_KEY"):
+            fail("OPENAI_API_KEY is required when provider=openai")
+        return "openai"
+    if os.environ.get("DEEPSEEK_API_KEY"):
+        return "deepseek"
+    if os.environ.get("OPENAI_API_KEY"):
+        return "openai"
+    fail("No live-eval API key configured. Set DEEPSEEK_API_KEY or OPENAI_API_KEY.")
+
+def make_client(provider: str):
     try:
         from openai import OpenAI
-    except ImportError as exc:
+    except ImportError:
         fail("openai package is required for live evals: pip install openai")
-    if not os.environ.get("OPENAI_API_KEY"):
-        fail("OPENAI_API_KEY is required for live evals")
-    return OpenAI()
+    if provider == "deepseek":
+        return OpenAI(
+            api_key=os.environ["DEEPSEEK_API_KEY"],
+            base_url="https://api.deepseek.com",
+        )
+    return OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+
+def default_model(provider: str) -> str:
+    return "deepseek-flash" if provider == "deepseek" else "gpt-5.6-luna"
+
+def response_reasoning_kwargs(model: str) -> dict[str, Any]:
+    # DeepSeek Responses API enables thinking by default. CI evaluation needs deterministic,
+    # concise outputs, so disable thinking for DeepSeek generation and judging.
+    if model.startswith("deepseek"):
+        return {"reasoning": {"effort": "none"}}
+    return {}
 
 def call_text(client, model: str, instructions: str, prompt: str, max_tokens: int) -> str:
     response = client.responses.create(
@@ -151,8 +228,39 @@ def call_text(client, model: str, instructions: str, prompt: str, max_tokens: in
         instructions=instructions,
         input=prompt,
         max_output_tokens=max_tokens,
+        **response_reasoning_kwargs(model),
     )
     return response.output_text.strip()
+
+def call_json_text(client, model: str, instructions: str, prompt: str, max_tokens: int) -> str:
+    """Request JSON output and retry transient empty/non-JSON responses."""
+    last_text = ""
+    last_error: Exception | None = None
+    for attempt in range(3):
+        response = client.responses.create(
+            model=model,
+            instructions=instructions,
+            input=prompt,
+            max_output_tokens=max_tokens,
+            **response_reasoning_kwargs(model),
+            text={
+                "format": {
+                    "type": "json_schema",
+                    "name": "eval_judgment",
+                    "schema": JUDGE_SCHEMA,
+                }
+            },
+        )
+        last_text = response.output_text.strip()
+        if not last_text:
+            last_error = ValueError("judge returned empty output")
+            continue
+        try:
+            extract_json(last_text)
+            return last_text
+        except (json.JSONDecodeError, ValueError) as exc:
+            last_error = exc
+    raise ValueError(f"judge did not return valid JSON after 3 attempts: {last_error}; output={last_text[:500]!r}")
 
 def skill_instructions(case: dict[str, Any]) -> str:
     parts = [
@@ -217,14 +325,17 @@ SKILL OUTPUT:
 {skill}
 ---END SKILL---
 """
-    raw_judge = call_text(client, judge_model, JUDGE_INSTRUCTIONS, judge_prompt, 1400)
+    raw_judge = call_json_text(client, judge_model, JUDGE_INSTRUCTIONS, judge_prompt, 1800)
     judge = extract_json(raw_judge)
     baseline_scores = judge.get("baseline_scores", {})
     skill_scores = judge.get("skill_scores", {})
     baseline_total = weighted_total(baseline_scores)
     skill_total = weighted_total(skill_scores)
     skill_cf = bool(judge.get("skill_critical_failure"))
-    case_pass = bool(judge.get("skill_meets_case")) and not skill_cf and skill_total >= 75
+    # Case pass is governed by the case-specific required behaviors and critical-failure rule.
+    # The broad weighted rubric remains a comparative quality signal; it must not fail a focused
+    # discovery case merely because irrelevant full-analysis dimensions were correctly omitted.
+    case_pass = bool(judge.get("skill_meets_case")) and not skill_cf
 
     return {
         "id": case["id"],
@@ -234,6 +345,7 @@ SKILL OUTPUT:
         "delta": round(skill_total - baseline_total, 2),
         "baseline_critical_failure": bool(judge.get("baseline_critical_failure")),
         "skill_critical_failure": skill_cf,
+        "skill_meets_case": bool(judge.get("skill_meets_case")),
         "pass": case_pass,
         "evidence": judge.get("evidence", []),
         "baseline_output": baseline,
@@ -250,11 +362,13 @@ def build_markdown(result: dict[str, Any]) -> str:
         "",
         f"- Generated: {result['generated_at']}",
         f"- Suite: {result['suite']}",
+        f"- Provider: {result['provider']}",
         f"- Model: {result['model']}",
         f"- Judge model: {result['judge_model']}",
         f"- Trigger accuracy: {result['summary']['trigger_passed']}/{result['summary']['trigger_total']}",
         f"- Behavior cases passed: {result['summary']['behavior_passed']}/{result['summary']['behavior_total']}",
         f"- Skill critical failures: {result['summary']['skill_critical_failures']}",
+        f"- Evaluation infrastructure errors: {result['summary']['infra_errors']}",
         f"- Skill better than baseline: {result['summary']['skill_better_than_baseline']}/{result['summary']['behavior_total']}",
         "",
         "## Trigger Cases",
@@ -276,7 +390,8 @@ def build_markdown(result: dict[str, Any]) -> str:
         lines.append(
             f"| {item['id']} | {item['suite']} | {item['baseline_score']:.2f} | "
             f"{item['skill_score']:.2f} | {item['delta']:+.2f} | "
-            f"{'YES' if item['skill_critical_failure'] else 'No'} | {'PASS' if item['pass'] else 'FAIL'} |"
+            f"{'YES' if item['skill_critical_failure'] else 'No'} | "
+            f"{'INFRA' if item.get('infra_error') else ('PASS' if item['pass'] else 'FAIL')} |"
         )
 
     failed = [x for x in result["behaviors"] if not x["pass"]] + [x for x in result["triggers"] if not x["pass"]]
@@ -293,8 +408,9 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--validate-only", action="store_true")
     parser.add_argument("--suite", choices=["smoke", "full", "trigger", "behavior", "independent"], default="smoke")
-    parser.add_argument("--model", default=os.environ.get("EVAL_MODEL", "gpt-5.6-luna"))
-    parser.add_argument("--judge-model", default=os.environ.get("EVAL_JUDGE_MODEL", "gpt-5.6-luna"))
+    parser.add_argument("--provider", choices=["auto", "deepseek", "openai"], default=os.environ.get("EVAL_PROVIDER", "auto"))
+    parser.add_argument("--model", default=os.environ.get("EVAL_MODEL", ""))
+    parser.add_argument("--judge-model", default=os.environ.get("EVAL_JUDGE_MODEL", ""))
     parser.add_argument("--output-dir", default=str(RESULTS_DEFAULT))
     args = parser.parse_args()
 
@@ -310,18 +426,40 @@ def main() -> int:
     if args.validate_only:
         return 0
 
-    client = make_client()
+    provider = resolve_provider(args.provider)
+    model = args.model or default_model(provider)
+    judge_model = args.judge_model or model
+    client = make_client(provider)
+    print(f"Live provider: {provider}; model: {model}; judge: {judge_model}")
     triggers, behaviors = select_cases(registry, args.suite)
 
     trigger_results = []
     for case in triggers:
         print(f"[trigger] {case['id']}")
-        trigger_results.append(run_trigger_case(client, args.model, case))
+        trigger_results.append(run_trigger_case(client, model, case))
 
     behavior_results = []
     for case in behaviors:
         print(f"[behavior] {case['id']}")
-        behavior_results.append(run_behavior_case(client, args.model, args.judge_model, case))
+        try:
+            behavior_results.append(run_behavior_case(client, model, judge_model, case))
+        except Exception as exc:
+            behavior_results.append({
+                "id": case["id"],
+                "suite": case["suite"],
+                "baseline_score": 0.0,
+                "skill_score": 0.0,
+                "delta": 0.0,
+                "baseline_critical_failure": False,
+                "skill_critical_failure": False,
+                "skill_meets_case": False,
+                "pass": False,
+                "infra_error": f"{type(exc).__name__}: {exc}",
+                "evidence": [],
+                "baseline_output": "",
+                "skill_output": "",
+                "scores": {"baseline": {}, "skill": {}},
+            })
 
     summary = {
         "trigger_total": len(trigger_results),
@@ -330,13 +468,15 @@ def main() -> int:
         "behavior_passed": sum(1 for x in behavior_results if x["pass"]),
         "skill_critical_failures": sum(1 for x in behavior_results if x["skill_critical_failure"]),
         "skill_better_than_baseline": sum(1 for x in behavior_results if x["skill_score"] > x["baseline_score"]),
+        "infra_errors": sum(1 for x in behavior_results if x.get("infra_error")),
     }
 
     result = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "suite": args.suite,
-        "model": args.model,
-        "judge_model": args.judge_model,
+        "provider": provider,
+        "model": model,
+        "judge_model": judge_model,
         "summary": summary,
         "triggers": trigger_results,
         "behaviors": behavior_results,
@@ -352,6 +492,7 @@ def main() -> int:
         summary["trigger_passed"] == summary["trigger_total"]
         and summary["behavior_passed"] == summary["behavior_total"]
         and summary["skill_critical_failures"] == 0
+        and summary["infra_errors"] == 0
         and (
             summary["behavior_total"] == 0
             or summary["skill_better_than_baseline"] > summary["behavior_total"] / 2

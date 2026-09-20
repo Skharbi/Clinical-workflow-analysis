@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "healthcare-clinical-workflow-analyst",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Safety-aware healthcare workflow analysis for clinical operations, medication systems, health IT, requirements, risks, testing, and implementation readiness.",
   "author": {
     "name": "Saleh Alharbi",

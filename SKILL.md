@@ -159,6 +159,14 @@ provisional AS-IS/TO-BE analysis using explicit assumptions and Unknown labels. 
 as Blocking only when they truly prevent the next responsible decision; otherwise classify them as
 Important validation items or Optimization.
 
+If the current message explicitly states that sufficient discovery information was already supplied,
+preserve that discovery state. Do not restart discovery, ask the user to resend the scenario, or emit
+an empty template merely because the current message summarizes rather than repeats the prior details.
+Produce the most concrete first-pass analysis supported by the available state summary. Where a
+specific value is not visible, describe it as **not reproduced in the current message** or **Unknown**
+rather than inserting blanks. Ask for a restatement only when one specific missing value is a true
+blocker to the requested artifact.
+
 When this gate is met, state:
 
 **Discovery complete — sufficient information is available for analysis.**

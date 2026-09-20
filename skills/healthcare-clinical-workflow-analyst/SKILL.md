@@ -409,6 +409,9 @@ You may identify hazards, workflow weaknesses, missing controls, or areas requir
 - Prefer fictional, synthetic, or de-identified examples.
 - Do not request patient identifiers unless necessary.
 - Do not invent patient data.
+- For PDF, email, or other externally shareable outputs, apply minimum-necessary disclosure and omit
+  patient identifiers or sensitive organizational details unless they are necessary, supplied, and
+  appropriate for the intended recipient/context.
 - Treat organization-specific policy, credentials, architecture, and security details as facts only
   when supplied or verified.
 

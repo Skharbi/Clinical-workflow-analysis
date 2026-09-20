@@ -91,10 +91,10 @@ The package should also pass the platform skill validator before release.
 
 ## Release status
 
-v1.0.2, release candidate. Keeps the visible discovery finish line and decision-first output, but
-now asks one material question at a time by default, reassesses the discovery gate after every answer,
-preserves distinct clinical/device event semantics such as ADC removal versus medication administration,
-and strengthens blocker ownership, outcome-measure discipline, and regression evals. The existing healthcare safety, uncertainty, and
+v1.0.3, release candidate. Keeps the v1.0.2 discovery and event-semantics safeguards and adds
+a shorter decision-focused default final response, explicit PDF/report and executive-email delivery
+modes, truthful artifact/send behavior, and regression tests that ensure format changes never remove
+material assumptions, warnings, blockers, or validation gaps. The existing healthcare safety, uncertainty, and
 human-governance boundaries remain unchanged. Example outputs are demonstrations, not proof that a
 live workflow, system, device, or organization is safe, compliant, or implementation-ready.
 Structural checks and limited AI forward tests do not substitute for organizational validation

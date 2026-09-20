@@ -25,8 +25,8 @@ It is not a clinical decision-support system and must not be used for patient-sp
 ## What the user experiences
 
 During discovery, the skill summarizes what it understands, shows what is complete or missing, asks
-no more than three material questions at a time, and tells the user what output comes next. It stops
-discovery once enough information is available instead of trying to eliminate every unknown.
+one material question at a time by default, and reassesses after every answer. It stops discovery as
+soon as a responsible first-pass analysis is possible instead of trying to eliminate every unknown.
 
 A full analysis is displayed in this order:
 
@@ -88,9 +88,10 @@ The package should also pass the platform skill validator before release.
 
 ## Release status
 
-v1.0.1, public release. Adds a visible discovery finish line, limits question batches to three,
-shows users what is complete and what remains, and replaces the default 15-section report with a
-decision-first, progressively disclosed output. The existing healthcare safety, uncertainty, and
+v1.0.2, release candidate. Keeps the visible discovery finish line and decision-first output, but
+now asks one material question at a time by default, reassesses the discovery gate after every answer,
+preserves distinct clinical/device event semantics such as ADC removal versus medication administration,
+and strengthens blocker ownership, outcome-measure discipline, and regression evals. The existing healthcare safety, uncertainty, and
 human-governance boundaries remain unchanged. Example outputs are demonstrations, not proof that a
 live workflow, system, device, or organization is safe, compliant, or implementation-ready.
 Structural checks and limited AI forward tests do not substitute for organizational validation

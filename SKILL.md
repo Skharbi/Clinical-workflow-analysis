@@ -263,6 +263,14 @@ workflow, policy, system behavior, and governance evidence support that equivale
 workflows, explicitly challenge proposals where an ADC removal or inventory transaction is intended
 to stand in for actual medication administration or clinical documentation.
 
+When the user explicitly proposes one medication event as another (for example, ADC removal as
+administration), do not defer the narrow assessment to broad discovery. State that the equivalence is
+not established from the proposal alone, identify the authoritative administration record that must be
+verified, and surface at minimum these exception scenarios where relevant: removed but not given,
+return, waste, partial dose, delayed administration, and correction/amendment. Identify the evidence
+needed to support any future equivalence: local workflow/policy, configured system behavior, source of
+truth, user verification, audit trail, downstream documentation effects, and authorized validation.
+
 ### 7. Derive requirements
 
 Classify when useful:

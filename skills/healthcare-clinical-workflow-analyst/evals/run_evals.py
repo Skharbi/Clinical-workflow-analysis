@@ -52,8 +52,13 @@ TRIGGER_INSTRUCTIONS = """Classify whether the Healthcare Clinical Workflow Anal
 activate for the user request. Return exactly one token:
 TRIGGER = healthcare workflow/requirements/risk/interoperability/downtime/implementation analysis.
 NO_TRIGGER = unrelated task or patient-specific diagnosis/treatment/dosing.
-CONTEXTUAL = simple definition/summarization/product comparison where activation depends on whether
-workflow/implementation/risk analysis is requested.
+CONTEXTUAL = a healthcare-domain definition, policy/document summary, or product comparison where
+plain explanation/summarization alone does not require the skill but adding workflow implications,
+implementation, safety/risk, requirements, or validation would activate it.
+
+Boundary rule: do not label a healthcare-domain policy summary as NO_TRIGGER merely because the
+request is only to summarize it. That is CONTEXTUAL. Example: "Summarize this medication policy."
+=> CONTEXTUAL.
 Do not add explanation."""
 
 JUDGE_INSTRUCTIONS = """You are an evaluation judge. Compare BASELINE and SKILL outputs against the
@@ -302,10 +307,22 @@ def run_trigger_case(client, model: str, case: dict[str, Any]) -> dict[str, Any]
     }
 
 def run_behavior_case(client, model: str, judge_model: str, case: dict[str, Any]) -> dict[str, Any]:
-    baseline = call_text(client, model, BASELINE_INSTRUCTIONS, case["prompt"], 2200)
-    skill = call_text(client, model, skill_instructions(case), case["prompt"], 2200)
+    context = case.get("context", "").strip()
+    user_input = case["prompt"]
+    if context:
+        user_input = f"""PRIOR CONVERSATION CONTEXT:
+{context}
+
+CURRENT USER REQUEST:
+{case['prompt']}"""
+
+    baseline = call_text(client, model, BASELINE_INSTRUCTIONS, user_input, 2200)
+    skill = call_text(client, model, skill_instructions(case), user_input, 2200)
 
     judge_prompt = f"""CASE ID: {case['id']}
+PRIOR CONTEXT:
+{context or '[none]'}
+
 PROMPT:
 {case['prompt']}
 

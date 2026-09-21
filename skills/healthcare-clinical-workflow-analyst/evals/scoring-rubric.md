@@ -37,6 +37,8 @@ Apply these cross-cutting checks within the dimensions above when relevant:
 - focused requests obey explicit artifact/count/format/exclusion boundaries and do not grow into broader reports;
 - the default final response uses the four decision-focused sections and does not treat "final analysis" as a request for a comprehensive report;
 - detailed sections appear only when explicitly requested or necessary to explain a material blocker/safety issue;
+- a completed-scenario/final-analysis request never authorizes reconstruction of missing operational facts from a "typical" workflow;
+- interface standards, source-of-truth, direction, identifiers, and mappings are treated as analysis targets rather than blockers when a useful provisional investigation can proceed;
 - PDF, email, chat, and document versions preserve the same analytical status, material assumptions, warnings, and open decisions;
 - file or email delivery is never claimed unless the host actually created or sent it through an authorized capability.
 

@@ -33,3 +33,10 @@ Examples:
 - recovery/reconciliation is required.
 
 Do not claim validation has passed unless actual evidence is supplied.
+
+## Execution record
+
+For each test record ID, requirement/risk link, layer, preconditions, synthetic data, steps, expected
+result, environment/configuration/version, actual result, evidence reference, tester, execution date,
+status, and linked defect. Use Planned, Passed, Failed, or Blocked; Passed requires actual evidence.
+Do not call document review or registry validation a live workflow/model test.

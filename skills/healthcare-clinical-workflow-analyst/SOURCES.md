@@ -4,6 +4,25 @@ This file lists the authoritative foundations that inform the skill.
 
 The skill must distinguish external guidance from local organizational policy and should verify the latest version of standards or guidance when freshness matters.
 
+## Applicability and review record
+
+Document source/section, supported claim, edition/version, setting/jurisdiction, effective date,
+date checked, verification limitations, and whether the organization has adopted it. A link is not
+proof of implementation conformity or local applicability. Confirm the actual supported FHIR/HL7
+version and implementation guide before implementation-specific conclusions.
+
+The AHRQ toolkit targets ambulatory care; adapt its techniques explicitly for inpatient/OR settings.
+The SAFER landing page identifies the 2025 guide set; it is U.S. guidance, not automatic local law.
+AHRQ and SAFER landing pages were checked on 2026-10-02; this is not a review of every linked guide.
+Other registry entries below were not freshly verified in this strengthening pass.
+
+## AI risk and evaluation
+
+**Resource:** NIST AI 600-1, Generative AI Profile (2024)
+**Use:** Voluntary risk/evaluation context; not a mandatory healthcare compliance standard.
+**URL:** https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
+**Checked:** 2026-10-02, publication landing page only.
+
 ## Workflow and health IT
 
 ### Agency for Healthcare Research and Quality (AHRQ)

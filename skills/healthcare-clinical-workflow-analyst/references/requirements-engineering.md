@@ -41,6 +41,12 @@ Recommended:
 - Source/Rationale
 - Workflow Link
 - Acceptance Method
+- Source class and evidence reference
+- Proposed/approved status and adoption evidence
+- Decision owner, priority, and outstanding dependencies
+
+Analyst-generated requirements are Proposed by default. Shall wording does not create an adopted
+obligation. Identify the binding authority or approval evidence before claiming mandatory status.
 
 ## Example
 

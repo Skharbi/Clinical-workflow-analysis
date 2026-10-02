@@ -4,11 +4,19 @@
 from pathlib import Path
 import re
 import sys
+import json
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_ROOT = ROOT / "skills" / "healthcare-clinical-workflow-analyst"
 
 REQUIRED = {
+    "docs/STRENGTHENING_STATUS.md",
+    "docs/FORWARD_SAMPLES_2026-10-02.md",
+    "tests/test_eval_integrity.py",
+    "evals/strengthening-protocol.md",
+    "references/security-and-privacy.md",
+    "skills/healthcare-clinical-workflow-analyst/evals/strengthening-protocol.md",
+    "skills/healthcare-clinical-workflow-analyst/references/security-and-privacy.md",
     "plugin.json",
     ".codex-plugin/plugin.json",
     "README.md",
@@ -121,6 +129,10 @@ if actual != REQUIRED:
     fail(f"unexpected package tree; extra={extra}, missing={missing_from_tree}")
 
 skill = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
+versions = [json.loads((ROOT / path).read_text())["version"] for path in
+            ("plugin.json", ".codex-plugin/plugin.json")]
+if len(set(versions)) != 1 or f"v{versions[0]}." not in skill:
+    fail("manifest and skill release versions disagree")
 if not skill.startswith("---\n"):
     fail("SKILL.md lacks YAML frontmatter")
 if "name: healthcare-clinical-workflow-analyst" not in skill:
@@ -134,6 +146,8 @@ for path in sorted(ROOT.rglob("*.md")):
         fail(f"empty Markdown file: {path.relative_to(ROOT)}")
 
 for relative in (
+    "evals/strengthening-protocol.md",
+    "references/security-and-privacy.md",
     "SKILL.md",
     "PROJECT_SCOPE.md",
     "KNOWLEDGE_BASE.md",
@@ -164,5 +178,14 @@ for relative in (
 ):
     if (ROOT / relative).read_bytes() != (SKILL_ROOT / relative).read_bytes():
         fail(f"plugin skill copy is out of sync: {relative}")
+
+for relative in ("SKILL.md", "KNOWLEDGE_BASE.md", "PROJECT_SCOPE.md", "SOURCES.md"):
+    text = (SKILL_ROOT / relative).read_text(encoding="utf-8")
+    for target in re.findall(r"\[[^\]]+\]\(([^)]+)\)", text):
+        if "://" in target or target.startswith("#"):
+            continue
+        target = target.split("#", 1)[0]
+        if not (SKILL_ROOT / target).exists():
+            fail(f"broken bundled link in {relative}: {target}")
 
 print(f"PASS: {len(actual)} required files present; package integrity checks succeeded")

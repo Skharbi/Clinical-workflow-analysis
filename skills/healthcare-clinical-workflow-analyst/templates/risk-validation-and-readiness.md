@@ -16,9 +16,9 @@ Do not assign formal risk scores unless the organization supplies the framework 
 
 ## Test scenarios
 
-| Test ID | Layer | Path | Preconditions/data | Steps | Expected result | Evidence | Status |
-|---|---|---|---|---|---|---|---|
-| T-001 | Functional/Integration/E2E/Negative/Failure/UAT/Regression/Production | Normal/Exception/Recovery |  |  |  |  | Not run |
+| Test ID | Requirement/risk | Layer/path | Preconditions/synthetic data | Steps | Expected | Actual | Environment/version | Evidence/tester/date | Status/defect |
+|---|---|---|---|---|---|---|---|---|---|
+| T-001 |  |  |  |  |  | Not executed |  | Pending | Planned |
 
 ## Downtime and reconciliation
 

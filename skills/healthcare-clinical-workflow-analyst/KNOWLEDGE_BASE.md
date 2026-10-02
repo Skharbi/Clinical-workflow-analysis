@@ -1,6 +1,6 @@
 # Healthcare Clinical Workflow Analyst — Knowledge Base
 
-**Version:** 1.1  
+**Document version:** 1.2 (independent of skill release version)
 **Purpose:** Core domain model for healthcare workflow and health IT analysis  
 **Last reviewed:** 2026-09-16
 
@@ -205,7 +205,11 @@ Typical ADC-related domains include:
 
 A common conceptual flow is:
 
-**EHR order → Pharmacy verification → Interface → ADC patient profile → Nurse access → Medication removal → Administration → Inventory update**
+**EHR order → Pharmacy verification → Interface → ADC patient profile → Nurse access → Medication removal**
+
+Cabinet inventory movement is a separate transaction with locally verified timing. Actual
+administration and its clinical documentation are separate events, as are returns, waste, partial
+use, corrections, and charges. Removal alone does not establish that medication was administered.
 
 Actual architecture varies by vendor and organization and must be verified.
 

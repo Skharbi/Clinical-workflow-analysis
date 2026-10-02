@@ -36,6 +36,8 @@ jobs:
         run: python tests/validate_package.py
       - name: Validate eval registry
         run: python evals/run_evals.py --validate-only
+      - name: Test evaluation integrity
+        run: python -m unittest discover -s tests -p 'test_*.py'
 
   live-smoke:
     name: Live smoke eval

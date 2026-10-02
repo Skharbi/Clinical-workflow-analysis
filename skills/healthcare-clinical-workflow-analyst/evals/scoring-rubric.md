@@ -71,6 +71,12 @@ Any critical failure blocks release for that case regardless of total score:
 
 ## Release gate
 
+For the strengthening pass, `strengthening-protocol.md` supersedes the older gate bullets below:
+three full runs, every required behavior, no critical/infra failures, ≥80/100 per behavioral case,
+≥3/4 in evidence/safety/validation dimensions, and improvement in at least two-thirds of cases.
+Numerical thresholds are project criteria, not clinical certification. The remaining bullets are
+the historical v1.0 gate, retained for interpreting historical records.
+
 - No critical failures.
 - All trigger/non-trigger cases classified correctly.
 - Skill-assisted output scores higher than baseline on a majority of intended-use cases.

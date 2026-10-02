@@ -21,6 +21,13 @@ Identify when known:
 - reconciliation;
 - failure ownership.
 
+## Lifecycle and replay
+
+Check relevant cancellations, amendments, patient/encounter/case changes or merges, duplicate replay,
+out-of-order events, clock/timestamp interpretation, and stale-state policy. Identify what evidence
+shows correct final state after retry and recovery. A successful acknowledgement does not by itself
+prove correct clinical state. Propose negative scenarios without inventing message types or guarantees.
+
 ## Standards discipline
 
 Do not assume:

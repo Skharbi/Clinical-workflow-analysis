@@ -48,7 +48,9 @@ Email sending requires an authorized mail capability and an explicit send reques
 
 ## Use it on ChatGPT mobile
 
-**Not available yet.** The package is ready, but it must be submitted to and approved by OpenAI before people can install it in the ChatGPT mobile app. Mobile users will not need PowerShell or a terminal after publication.
+This repository does not establish an approved ChatGPT mobile installation route. Do not paste the
+terminal commands below into chat. Use a supported host's current installation instructions; package
+validation does not mean marketplace approval or mobile availability.
 
 ## Install
 
@@ -60,7 +62,7 @@ Run the command on your **computer** in PowerShell, Windows Terminal, or a macOS
 npx -y skills add Skharbi/Clinical-workflow-analysis --skill healthcare-clinical-workflow-analyst --global --agent codex --yes
 ```
 
-Restart Codex. The skill is ready.
+Verify the command succeeds and the skill appears in Codex. Installation is not clinical validation.
 
 ### Claude Code
 
@@ -68,7 +70,8 @@ Restart Codex. The skill is ready.
 npx -y skills add Skharbi/Clinical-workflow-analysis --skill healthcare-clinical-workflow-analyst --global --agent claude-code --yes
 ```
 
-Restart Claude Code. The skill is ready.
+Verify the command succeeds and the skill appears in Claude Code. These are terminal instructions,
+not installation instructions for the Claude mobile app.
 
 ## Package structure
 
@@ -89,6 +92,7 @@ Deterministic package and registry checks require no API key:
 ```bash
 python tests/validate_package.py
 python evals/run_evals.py --validate-only
+python -m unittest discover -s tests -p 'test_*.py'
 ```
 
 Live regression evaluation compares a generic baseline with the skill-assisted answer, scores both
@@ -120,6 +124,11 @@ Manual and weekly scheduled runs can execute the full suite and upload the machi
 Markdown reports as workflow artifacts.
 
 The package should also pass the platform skill validator before release.
+
+The strengthening protocol is in `evals/strengthening-protocol.md`. Full release evidence requires
+three repeated full-suite runs, retained outputs/provenance, and reviewer adjudication. A smoke run,
+package check, or manual instruction review cannot establish that gate passed. See
+`docs/STRENGTHENING_STATUS.md` for current evidence and limitations.
 
 ## Release status
 

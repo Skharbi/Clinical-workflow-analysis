@@ -1,6 +1,6 @@
 # Healthcare Clinical Workflow Analyst — Project Scope
 
-**Version:** 1.1  
+**Document version:** 1.2 (independent of skill release version)
 **Project status:** v1.0.7 / evidence-first analysis release candidate
 **Project type:** Open-source Agent Skill  
 **Domain:** Healthcare informatics, clinical workflow, medication-use technology, and health IT implementation  
@@ -265,18 +265,10 @@ The skill should:
 
 ## 10. Evidence model
 
-When external evidence is required, prefer:
-
-1. applicable law or regulation;
-2. official standards organizations;
-3. government health agencies;
-4. recognized patient-safety organizations;
-5. professional societies;
-6. peer-reviewed literature;
-7. official vendor documentation;
-8. supplied local organizational policy;
-9. documented stakeholder evidence;
-10. general web sources.
+Select evidence by claim and applicability, not a universal hierarchy. Applicable law constrains
+design; adopted local policy describes rules; observed practice/logs describe operations; vendor
+documentation supports product capabilities; research and professional guidance support recommendations.
+Check jurisdiction, setting, version, dates, and provenance. Preserve conflicts and unresolved decisions.
 
 Local organizational policy and configuration may differ from external best practice.
 
@@ -286,7 +278,7 @@ The skill must not treat generic guidance as local policy.
 
 ## 11. MVP deliverables
 
-Version 0.1.0 should include:
+The release bundle should include:
 
 - production `SKILL.md`;
 - project scope;
@@ -361,6 +353,10 @@ Is the output proportionate and operationally useful?
 ---
 
 ## 14. Release gate for v1.0
+
+For the strengthening work, use `evals/strengthening-protocol.md` as the frozen evaluation contract.
+Existing version numbers do not establish that this gate has passed. Preserve the current weighted
+0–100 rubric rather than silently replacing it with the planning draft's proposed 0–16 rubric.
 
 Do not label the project v1.0 until:
 

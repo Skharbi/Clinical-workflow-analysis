@@ -31,3 +31,12 @@ Use when workflow depends on critical technology.
 - Who verifies reconciliation?
 
 A fallback plan without restoration and reconciliation is incomplete.
+
+## Entry and recovery gates
+
+Identify who declares degraded/downtime operation, which functions remain usable, required fallback
+resources, backlog priority, and who authorizes return to normal service. Reconcile manual records
+and queued transactions using verified identity/context, duplicate prevention, exception ownership,
+and an evidence record. Do not replay stale or conflicting transactions blindly. Connectivity
+restoration alone is insufficient while clinically consequential conflicts remain unresolved.
+Do not invent recovery-time targets or vendor offline behavior.

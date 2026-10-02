@@ -4,9 +4,9 @@ Write mandatory requirements with **shall**. Do not invent numeric thresholds, s
 
 ## Requirement register
 
-| ID | Type | Requirement | Source/rationale | Workflow link | Dependency | Acceptance method | Status |
-|---|---|---|---|---|---|---|---|
-| FR-001 | Functional | The system shall… |  |  |  |  | Draft |
+| ID | Type | Requirement | Source/class/rationale | Workflow link | Dependency | Acceptance method | Status | Decision owner/priority |
+|---|---|---|---|---|---|---|---|---|
+| FR-001 | Functional | The system shall… | Analyst proposal |  |  |  | Proposed | Unknown |
 
 Suggested prefixes: `FR` functional, `CWR` clinical workflow, `INT` integration, `DATA` data, `NFR` non-functional, `SEC` security/privacy, `OPS` operational, `DT` downtime, `RPT` reporting.
 
